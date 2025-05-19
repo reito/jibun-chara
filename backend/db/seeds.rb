@@ -1,9 +1,13 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# db/seeds.rb
+
+tenant = Tenant.create!(
+  name: "大阪ブライダル相談所",
+  slug: "osaka-bridal"
+)
+
+tenant.cta_buttons.create!(
+  [
+    { title: "公式サイトを見る", url: "https://example.com", category: "external", visible: true, position: 1 },
+    { title: "LINE相談はこちら", url: "https://line.me/R/ti/p/xxxx", category: "line", visible: true, position: 2 }
+  ]
+)
