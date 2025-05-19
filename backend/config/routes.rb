@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "pages/home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -7,4 +8,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  scope '/:tenant_slug' do
+    get '/', to: 'pages#home'
+  end
+
+  namespace :api do
+    namespace :v1 do
+      get "cta_buttons/index"
+      get '/tenants/:tenant_slug/cta_buttons', to: 'cta_buttons#index'
+    end
+  end
 end
