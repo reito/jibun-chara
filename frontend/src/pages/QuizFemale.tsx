@@ -14,153 +14,228 @@ interface Question {
 const questions: Question[] = [
   {
     id: 1,
-    text: "人から褒められると嬉しい",
-    scores: { idol: 1, career: 0, mother: 0 }
-  },
-  {
-    id: 2,
     text: "飲み会で初対面の人と話すのは得意？",
     scores: { idol: 2, career: 0, mother: 0 }
   },
   {
-    id: 3,
+    id: 2,
     text: "自分の話をするより人の話を聞く方が楽しい。",
     scores: { idol: 0, career: 0, mother: 2 }
   },
   {
-    id: 4,
-    text: "目標に向かって努力するのが好き",
-    scores: { idol: 0, career: 2, mother: 0 }
-  },
-  {
-    id: 5,
-    text: "人に頼られるのが嬉しい",
-    scores: { idol: 0, career: 0, mother: 1 }
-  },
-  {
-    id: 6,
-    text: "新しいことに挑戦するのが好き",
-    scores: { idol: 1, career: 1, mother: 0 }
-  },
-  {
-    id: 7,
-    text: "人前で話すのは緊張する",
-    scores: { idol: 0, career: 0, mother: 1 }
-  },
-  {
-    id: 8,
-    text: "計画を立てて行動するのが好き",
-    scores: { idol: 0, career: 2, mother: 0 }
-  },
-  {
-    id: 9,
-    text: "人を喜ばせるのが好き",
-    scores: { idol: 1, career: 0, mother: 1 }
-  },
-  {
-    id: 10,
-    text: "自分の意見をはっきり言える",
-    scores: { idol: 0, career: 2, mother: 0 }
-  },
-  {
-    id: 11,
+    id: 3,
     text: "毎日LINEをするのは面倒くさいと感じる。",
     scores: { idol: 0, career: 2, mother: 0 }
   },
   {
-    id: 12,
+    id: 4,
     text: "飲み会の席ではつい気配りして料理を取り分ける？",
     scores: { idol: 0, career: 0, mother: 2 }
   },
   {
-    id: 13,
-    text: "人前で話すのは緊張する",
-    scores: { idol: 0, career: 0, mother: 1 }
-  },
-  {
-    id: 14,
-    text: "計画を立てて行動するのが好き",
-    scores: { idol: 0, career: 2, mother: 0 }
-  },
-  {
-    id: 15,
-    text: "人を喜ばせるのが好き",
-    scores: { idol: 1, career: 0, mother: 1 }
-  },
-  {
-    id: 16,
+    id: 5,
     text: "相手に尽くすよりも、自分が尽くされる方が嬉しい？",
     scores: { idol: 2, career: 0, mother: 0 }
   },
   {
-    id: 17,
+    id: 6,
     text: "たまに自分が何をしたいのかわからなくなる時がある。",
     scores: { idol: 0, career: 0, mother: 2 }
   },
   {
-    id: 18,
-    text: "人前で話すのは緊張する",
-    scores: { idol: 0, career: 0, mother: 1 }
-  },
-  {
-    id: 19,
-    text: "計画を立てて行動するのが好き",
-    scores: { idol: 0, career: 2, mother: 0 }
-  },
-  {
-    id: 20,
-    text: "人を喜ばせるのが好き",
-    scores: { idol: 1, career: 0, mother: 1 }
-  },
-  {
-    id: 21,
+    id: 7,
     text: "計画を立てたり、スケジュール管理が好きだ。",
     scores: { idol: 0, career: 2, mother: 0 }
   },
   {
-    id: 22,
+    id: 8,
     text: "パートナーには優しく甘えさせてほしいと思う。",
     scores: { idol: 2, career: 0, mother: 0 }
   },
   {
-    id: 23,
-    text: "人前で話すのは緊張する",
-    scores: { idol: 0, career: 0, mother: 1 }
-  },
-  {
-    id: 24,
-    text: "計画を立てて行動するのが好き",
-    scores: { idol: 0, career: 2, mother: 0 }
-  },
-  {
-    id: 25,
-    text: "人を喜ばせるのが好き",
-    scores: { idol: 1, career: 0, mother: 1 }
-  },
-  {
-    id: 26,
+    id: 9,
     text: "自分のやるべきことはきっちりこなさないと気が済まない。",
     scores: { idol: 0, career: 2, mother: 0 }
   },
   {
-    id: 27,
+    id: 10,
     text: "誰かが困っていたら放っておけない。",
     scores: { idol: 0, career: 0, mother: 2 }
   },
   {
-    id: 28,
-    text: "人前で話すのは緊張する",
-    scores: { idol: 0, career: 0, mother: 1 }
+    id: 11,
+    text: "特別扱いをされると嬉しい。",
+    scores: { idol: 2, career: 0, mother: 0 }
   },
   {
-    id: 29,
-    text: "計画を立てて行動するのが好き",
+    id: 12,
+    text: "人に頼るのは苦手で、自分でなんとかしようとする。",
     scores: { idol: 0, career: 2, mother: 0 }
   },
   {
+    id: 13,
+    text: "カバンの中身が多くなりがち。",
+    scores: { idol: 0, career: 0, mother: 2 }
+  },
+  {
+    id: 14,
+    text: "デートのプランは相手に考えてほしい。",
+    scores: { idol: 2, career: 0, mother: 0 }
+  },
+  {
+    id: 15,
+    text: "問題が起きた時、自分が主導して解決しようとする。",
+    scores: { idol: 0, career: 2, mother: 0 }
+  },
+  {
+    id: 16,
+    text: "夢を持っている男性が好き。",
+    scores: { idol: 0, career: 2, mother: 0 }
+  },
+  {
+    id: 17,
+    text: "サプライズやプレゼントが好きで、相手に期待してしまう。",
+    scores: { idol: 2, career: 0, mother: 0 }
+  },
+  {
+    id: 18,
+    text: "洋服や鞄は可愛いものよりも機能性を重視する。",
+    scores: { idol: 0, career: 2, mother: 0 }
+  },
+  {
+    id: 19,
+    text: "自分の気持ちよりも、周りの人の意見を優先することが多い。",
+    scores: { idol: 0, career: 0, mother: 2 }
+  },
+  {
+    id: 20,
+    text: "流行には敏感な方である。",
+    scores: { idol: 2, career: 0, mother: 0 }
+  },
+  {
+    id: 21,
+    text: "相手が少し偉そうでも優柔不断な人よりマシと思う",
+    scores: { idol: 0, career: 0, mother: 2 }
+  },
+  {
+    id: 22,
+    text: "恋人とは「特別な日に特別な場所へ行きたい」と思う。",
+    scores: { idol: 2, career: 0, mother: 0 }
+  },
+  {
+    id: 23,
+    text: "仕事や家事などは効率的にこなすタイプだ。",
+    scores: { idol: 0, career: 2, mother: 0 }
+  },
+  {
+    id: 24,
+    text: "よく道を聞かれることが多い。",
+    scores: { idol: 0, career: 0, mother: 2 }
+  },
+  {
+    id: 25,
+    text: "歩く時は人の右側を歩きたい。",
+    scores: { idol: 2, career: 0, mother: 0 }
+  },
+  {
+    id: 26,
+    text: "頭ポンポンされるのは正直いやだと感じる。",
+    scores: { idol: 0, career: 2, mother: 0 }
+  },
+  {
+    id: 27,
+    text: "負ける勝負はしたくない。",
+    scores: { idol: 0, career: 2, mother: 0 }
+  },
+  {
+    id: 28,
+    text: "即断即決する事が苦手だと思う。",
+    scores: { idol: 0, career: 0, mother: 2 }
+  },
+  {
+    id: 29,
+    text: "人の目が気になる方である。",
+    scores: { idol: 0, career: 0, mother: 2 }
+  },
+  {
     id: 30,
-    text: "人を喜ばせるのが好き",
-    scores: { idol: 1, career: 0, mother: 1 }
+    text: "何かを決める時に直感を重視することが多い。",
+    scores: { idol: 2, career: 0, mother: 0 }
+  },
+  {
+    id: 31,
+    text: "容姿や外見についての評価が大切である。",
+    scores: { idol: 2, career: 0, mother: 0 }
+  },
+  {
+    id: 32,
+    text: "美容にお金を使うのが好きだ。",
+    scores: { idol: 2, career: 0, mother: 0 }
+  },
+  {
+    id: 33,
+    text: "可愛いものやキラキラしたものを見ると欲しくなる。",
+    scores: { idol: 2, career: 0, mother: 0 }
+  },
+  {
+    id: 34,
+    text: "男性には経済力を求めてしまう。",
+    scores: { idol: 2, career: 0, mother: 0 }
+  },
+  {
+    id: 35,
+    text: "SNSで自分の写真をよく投稿する方だ。",
+    scores: { idol: 2, career: 0, mother: 0 }
+  },
+  {
+    id: 36,
+    text: "学校や職場ではリーダー的な立場になることが多い。",
+    scores: { idol: 0, career: 2, mother: 0 }
+  },
+  {
+    id: 37,
+    text: "考えたことや思いついたことに対しすぐに行動する方だ。",
+    scores: { idol: 0, career: 2, mother: 0 }
+  },
+  {
+    id: 38,
+    text: "周りを見ると努力が足りないと感じることが多い。",
+    scores: { idol: 0, career: 2, mother: 0 }
+  },
+  {
+    id: 39,
+    text: "結婚しても仕事は続けたいと思っている。",
+    scores: { idol: 0, career: 2, mother: 0 }
+  },
+  {
+    id: 40,
+    text: "女性も自律や自活する力が必要だと思う。",
+    scores: { idol: 0, career: 2, mother: 0 }
+  },
+  {
+    id: 41,
+    text: "家事をすることは好きな方だ。",
+    scores: { idol: 0, career: 0, mother: 2 }
+  },
+  {
+    id: 42,
+    text: "何か頼まれると断れないタイプだと思う。",
+    scores: { idol: 0, career: 0, mother: 2 }
+  },
+  {
+    id: 43,
+    text: "結婚したら家庭を優先したい。",
+    scores: { idol: 0, career: 0, mother: 2 }
+  },
+  {
+    id: 44,
+    text: "過去に浮気をされて許したことがある。",
+    scores: { idol: 0, career: 0, mother: 2 }
+  },
+  {
+    id: 45,
+    text: "パートナーには安定した仕事・収入を求める。",
+    scores: { idol: 0, career: 0, mother: 2 }
   }
 ];
 
@@ -171,14 +246,13 @@ interface QuizFemaleProps {
 const QuizFemale: React.FC<QuizFemaleProps> = ({ basePath }) => {
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [progress, setProgress] = useState(0);
+  const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     // 質問をシャッフル
-    for (let i = questions.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [questions[i], questions[j]] = [questions[j], questions[i]];
-    }
+    const shuffled = [...questions].sort(() => Math.random() - 0.5);
+    setShuffledQuestions(shuffled);
   }, []);
 
   const handleAnswerChange = (questionIndex: number, value: string) => {
@@ -194,34 +268,42 @@ const QuizFemale: React.FC<QuizFemaleProps> = ({ basePath }) => {
     e.preventDefault();
     
     // 未回答の質問がないかチェック
-    const unanswered = questions.find(q => !answers[`q${q.id}`]);
-    if (unanswered) {
-      alert('すべての質問に回答してください。');
+    const unansweredQuestions = shuffledQuestions.filter(q => !answers[`q${q.id}`]);
+    if (unansweredQuestions.length > 0) {
+      alert(`以下の質問に回答してください：\n質問 ${unansweredQuestions.map(q => q.id).join(', ')}`);
       return;
     }
 
-    // スコアの計算
-    const scores = {
-      idol: 0,
-      career: 0,
-      mother: 0
+    // 各タイプの質問数をカウント
+    const totalQuestions = {
+      idol: 10,
+      career: 10,
+      mother: 10
     };
 
-    questions.forEach(q => {
+    // 各タイプの「はい」の回答数をカウント
+    let selectedAnswers = { idol: 0, career: 0, mother: 0 };
+
+    shuffledQuestions.forEach(q => {
       const answer = answers[`q${q.id}`];
-      if (answer) {
-        scores.idol += q.scores.idol;
-        scores.career += q.scores.career;
-        scores.mother += q.scores.mother;
+      if (answer === "yes") {
+        if (q.scores.idol > 0) selectedAnswers.idol++;
+        if (q.scores.career > 0) selectedAnswers.career++;
+        if (q.scores.mother > 0) selectedAnswers.mother++;
+      }
+      // どちらでもないは0.5カウント
+      else if (answer === "neutral") {
+        if (q.scores.idol > 0) selectedAnswers.idol += 0.5;
+        if (q.scores.career > 0) selectedAnswers.career += 0.5;
+        if (q.scores.mother > 0) selectedAnswers.mother += 0.5;
       }
     });
 
-    // パーセンテージに変換
-    const total = scores.idol + scores.career + scores.mother;
+    // パーセンテージを計算
     const percentages = {
-      idol: Math.round((scores.idol / total) * 100),
-      career: Math.round((scores.career / total) * 100),
-      mother: Math.round((scores.mother / total) * 100)
+      idol: Math.round((selectedAnswers.idol / totalQuestions.idol) * 100),
+      career: Math.round((selectedAnswers.career / totalQuestions.career) * 100),
+      mother: Math.round((selectedAnswers.mother / totalQuestions.mother) * 100)
     };
 
     // 結果ページへ遷移
@@ -359,8 +441,8 @@ const QuizFemale: React.FC<QuizFemaleProps> = ({ basePath }) => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          {questions.map((question, index) => (
-            <div key={index} style={{
+          {shuffledQuestions.map((question, index) => (
+            <div key={question.id} style={{
               marginBottom: '20px',
               backgroundColor: '#fff',
               padding: '20px',
@@ -393,10 +475,10 @@ const QuizFemale: React.FC<QuizFemaleProps> = ({ basePath }) => {
                 }}>
                   <input
                     type="radio"
-                    name={`q${index}`}
+                    name={`q${question.id}`}
                     value={value}
-                    checked={answers[`q${index}`] === value}
-                    onChange={() => handleAnswerChange(index, value)}
+                    checked={answers[`q${question.id}`] === value}
+                    onChange={() => handleAnswerChange(question.id, value)}
                     style={{
                       marginRight: '12px',
                       transform: 'scale(1.2)',

@@ -1,5 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+// 画像のインポート
+import kingImage from '../assets/img/character-king.png';
+import knightImage from '../assets/img/character-knight.png';
+import princeImage from '../assets/img/character-prince.png';
+import idolImage from '../assets/img/character-idol.png';
+import careerImage from '../assets/img/character-career.png';
+import motherImage from '../assets/img/character-mother.png';
+import kingKnightImage from '../assets/img/character-king-knight.png';
+import knightPrinceImage from '../assets/img/character-knight-prince.png';
+import kingPrinceImage from '../assets/img/character-king-prince.png';
+import idolCareerImage from '../assets/img/character-idol-career.png';
+import careerMotherImage from '../assets/img/character-career-mother.png';
+import motherIdolImage from '../assets/img/character-mother-idol.png';
+import characterBalanceMaleImage from '../assets/img/character-balance-male.png';
+import characterBalanceFemaleImage from '../assets/img/character-balance-female.png';
 
 interface CharacterImage {
   image: string;
@@ -19,61 +36,61 @@ interface ResultProps {
 
 const characterImages: CharacterImages = {
   "キングタイプ": {
-    image: "/img/king_type.png",
+    image: kingImage,
     name: "キングタイプ"
   },
   "ナイトタイプ": {
-    image: "/img/knight_type.png",
+    image: knightImage,
     name: "ナイトタイプ"
   },
   "プリンスタイプ": {
-    image: "/img/prince_type.png",
+    image: princeImage,
     name: "プリンスタイプ"
   },
   "アイドルタイプ": {
-    image: "/img/idol_type.png",
+    image: idolImage,
     name: "アイドルタイプ"
   },
   "バリキャリタイプ": {
-    image: "/img/career_type.png",
+    image: careerImage,
     name: "バリキャリタイプ"
   },
   "マザータイプ": {
-    image: "/img/mother_type.png",
+    image: motherImage,
     name: "マザータイプ"
   },
   "バランスタイプ": {
     male: {
-      image: "/img/balance_type_male.png",
+      image: characterBalanceMaleImage,
       name: "バランスタイプ（男性）"
     },
     female: {
-      image: "/img/balance_type_female.png",
+      image: characterBalanceFemaleImage,
       name: "バランスタイプ（女性）"
     }
   },
   "キング＆ナイトタイプ": {
-    image: "/img/king_knight_type.png",
+    image: kingKnightImage,
     name: "キング＆ナイトタイプ"
   },
   "ナイト＆プリンスタイプ": {
-    image: "/img/knight_prince_type.png",
+    image: knightPrinceImage,
     name: "ナイト＆プリンスタイプ"
   },
   "プリンス＆キングタイプ": {
-    image: "/img/prince_king_type.png",
+    image: kingPrinceImage,
     name: "プリンス＆キングタイプ"
   },
   "アイドル＆バリキャリタイプ": {
-    image: "/img/idol_career_type.png",
+    image: idolCareerImage,
     name: "アイドル＆バリキャリタイプ"
   },
   "バリキャリ＆マザータイプ": {
-    image: "/img/career_mother_type.png",
+    image: careerMotherImage,
     name: "バリキャリ＆マザータイプ"
   },
   "マザー＆アイドルタイプ": {
-    image: "/img/mother_idol_type.png",
+    image: motherIdolImage,
     name: "マザー＆アイドルタイプ"
   }
 };
@@ -85,6 +102,9 @@ const Result: React.FC<ResultProps> = ({ basePath }) => {
   const [characterData, setCharacterData] = useState<CharacterImage | null>(null);
 
   useEffect(() => {
+    // ページの最上部にスクロール
+    window.scrollTo(0, 0);
+
     const userGender = searchParams.get('gender') || 'female';
     const resultType = searchParams.get('result');
 
@@ -104,7 +124,7 @@ const Result: React.FC<ResultProps> = ({ basePath }) => {
     setScores(newScores);
 
     // バランスタイプの判定
-    let newDisplayType = resultType || '';
+    let newDisplayType = '';
     const maxScore = Math.max(...Object.values(newScores));
     const maxTypes = Object.entries(newScores).filter(([_, score]) => score === maxScore);
 
@@ -129,6 +149,14 @@ const Result: React.FC<ResultProps> = ({ basePath }) => {
           newDisplayType = "マザー＆アイドルタイプ";
         }
       }
+    } else if (maxTypes.length === 1) {
+      newDisplayType = maxTypes[0][0];
+    }
+
+    // タイプが設定されていない場合は、最も高いスコアのタイプを設定
+    if (!newDisplayType) {
+      const maxType = Object.entries(newScores).reduce((a, b) => a[1] > b[1] ? a : b)[0];
+      newDisplayType = maxType;
     }
 
     setDisplayType(newDisplayType);
@@ -475,7 +503,7 @@ const Result: React.FC<ResultProps> = ({ basePath }) => {
             maxWidth: '320px',
             textAlign: 'center'
           }}>
-            外見＆内面！あなたが引き寄せたい理想の相手と出会うポイントを詳しく解説！
+            外見＆内面！あなたが引き寄せたい理想の相手<br />と出会うポイントを詳しく解説！
           </p>
 
           <a
@@ -515,6 +543,45 @@ const Result: React.FC<ResultProps> = ({ basePath }) => {
             textAlign: 'center'
           }}>
             理想の出会いに向けて、あなたに合った婚活方法を提案しながらおためし婚活ができます！
+          </p>
+
+          <a
+            href="https://square.link/u/vQEat01w"
+            style={{
+              background: 'linear-gradient(135deg, #FF88B3 0%, #FF69B4 100%)',
+              color: '#fff',
+              border: 'none',
+              padding: '16px 25px',
+              fontSize: '15px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              borderRadius: '50px',
+              transition: 'all 0.3s ease',
+              display: 'block',
+              textDecoration: 'none',
+              margin: '0 auto',
+              width: '100%',
+              maxWidth: '320px',
+              boxSizing: 'border-box',
+              boxShadow: '0 5px 15px rgba(255, 136, 179, 0.2)',
+              textAlign: 'center',
+              letterSpacing: '0.5px',
+              lineHeight: 1.5
+            }}
+          >
+            自分の取り扱い説明書を手に入れて<br />パートナー探しに活かす
+          </a>
+          <p style={{
+            fontSize: '14px',
+            color: '#666',
+            display: 'block',
+            fontWeight: 'normal',
+            lineHeight: 1.6,
+            margin: '8px auto 25px',
+            maxWidth: '320px',
+            textAlign: 'center'
+          }}>
+            あなたのキャラタイプを婚活に活かすヒント<br />をもっと深く知りたくありませんか？
           </p>
         </div>
 
