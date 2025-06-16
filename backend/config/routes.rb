@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   # 管理画面など
   get '/dashboard', to: 'dashboard#index'
 
+  # 招待リンク関連
+  get '/invite/:token', to: 'pages#invitation'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -33,6 +36,9 @@ Rails.application.routes.draw do
       resources :registrations, only: [:create]
       get "cta_buttons/index"
       get '/tenants/:tenant_slug/cta_buttons', to: 'cta_buttons#index'
+      get '/tenants/validate/:slug', to: 'tenants#validate'
+      get '/tenants/:tenant_slug/generate_invitation', to: 'tenants#generate_invitation_link'
+      get '/invitations/validate/:token', to: 'tenants#validate_invitation'
     end
   end
 end

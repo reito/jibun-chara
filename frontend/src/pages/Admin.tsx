@@ -1,10 +1,7 @@
 import React from 'react';
+import { BaseProps } from '../types';
 
-interface AdminProps {
-  basePath: string;
-}
-
-const Admin: React.FC<AdminProps> = ({ basePath }) => {
+const Admin: React.FC<BaseProps> = ({ basePath }) => {
   return (
     <div style={{ padding: 40 }}>
       <h2>管理画面（仮）</h2>

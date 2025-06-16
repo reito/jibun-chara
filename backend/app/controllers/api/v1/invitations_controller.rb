@@ -28,7 +28,7 @@ module Api
       private
 
       def tenant_params
-        params.require(:tenant).permit(:name, :slug)
+        params.require(:tenant).permit(:name, :slug, :admin_email)
       end
     end
   end

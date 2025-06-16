@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BaseProps } from '../types';
 
 interface Question {
   id: number;
@@ -9,10 +10,6 @@ interface Question {
     knight: number;
     prince: number;
   };
-}
-
-interface QuizMaleProps {
-  basePath: string;
 }
 
 const questions: Question[] = [
@@ -63,7 +60,7 @@ const questions: Question[] = [
   { id: 45, text: "女性に対して求めるのは癒しだ。", scores: { king: 0, knight: 0, prince: 2 } }
 ];
 
-const QuizMale: React.FC<QuizMaleProps> = ({ basePath }) => {
+const QuizMale: React.FC<BaseProps> = ({ basePath }) => {
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [progress, setProgress] = useState(0);
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);

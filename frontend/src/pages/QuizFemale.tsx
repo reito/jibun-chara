@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BaseProps } from '../types';
 
 interface Question {
   id: number;
@@ -239,11 +240,7 @@ const questions: Question[] = [
   }
 ];
 
-interface QuizFemaleProps {
-  basePath: string;
-}
-
-const QuizFemale: React.FC<QuizFemaleProps> = ({ basePath }) => {
+const QuizFemale: React.FC<BaseProps> = ({ basePath }) => {
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [progress, setProgress] = useState(0);
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);

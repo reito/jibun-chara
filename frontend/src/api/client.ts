@@ -2,7 +2,7 @@
 
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1';
 
 const client: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -41,5 +41,18 @@ client.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// 招待リンク関連のAPI
+export const invitationApi = {
+  generateLink: async (tenantSlug: string) => {
+    const response = await client.get(`/tenants/${tenantSlug}/generate_invitation`);
+    return response.data;
+  },
+
+  validateToken: async (token: string) => {
+    const response = await client.get(`/invitations/validate/${token}`);
+    return response.data;
+  }
+};
 
 export default client; 

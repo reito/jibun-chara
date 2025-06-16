@@ -11,7 +11,6 @@ const RegisterPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     password: '',
     password_confirmation: ''
   });
@@ -38,8 +37,9 @@ const RegisterPage: React.FC = () => {
       });
 
       if (response.data.status === 'success') {
-        // 登録成功時の処理
-        navigate('/dashboard');
+        // テナントのスラッグを使用してダッシュボードに遷移
+        const tenantSlug = response.data.data.tenant.slug;
+        navigate(`/${tenantSlug}/dashboard`);
       }
     } catch (err: any) {
       if (err.response?.data?.errors) {
@@ -60,200 +60,170 @@ const RegisterPage: React.FC = () => {
     }));
   };
 
-  if (error) {
-    return (
-      <div style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#f3f4f6'
-      }}>
-        <div style={{
-          padding: '2rem',
-          backgroundColor: 'white',
-          borderRadius: '0.5rem',
-          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-          maxWidth: '32rem',
-          width: '100%',
-          textAlign: 'center'
-        }}>
-          <h2 style={{
-            color: '#ef4444',
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-            marginBottom: '1rem'
-          }}>
-            エラーが発生しました
-          </h2>
-          <p style={{
-            color: '#4b5563',
-            fontSize: '1rem',
-            lineHeight: '1.5'
-          }}>
-            {error}
-          </p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div style={{
+      fontFamily: "'Noto Sans JP', sans-serif",
+      backgroundColor: '#f0f7f7',
+      margin: 0,
+      padding: '20px',
+      textAlign: 'center',
+      color: '#333',
+      lineHeight: 1.6,
       minHeight: '100vh',
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#f3f4f6',
-      padding: '1rem'
+      flexDirection: 'column',
+      justifyContent: 'center'
     }}>
       <div style={{
-        padding: '2rem',
-        backgroundColor: 'white',
-        borderRadius: '0.5rem',
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-        maxWidth: '32rem',
-        width: '100%'
+        backgroundColor: '#fff',
+        padding: '40px 30px',
+        borderRadius: '15px',
+        boxShadow: '0 8px 20px rgba(106, 193, 208, 0.1)',
+        margin: '0 auto',
+        maxWidth: '600px',
+        width: '100%',
+        boxSizing: 'border-box',
+        border: '1px solid rgba(106, 193, 208, 0.1)'
       }}>
         <h1 style={{
-          fontSize: '1.875rem',
-          fontWeight: 'bold',
-          color: '#1f2937',
-          marginBottom: '1.5rem',
-          textAlign: 'center'
+          color: '#5fb5d0',
+          fontSize: '28px',
+          margin: '0 0 30px',
+          fontWeight: 700,
+          lineHeight: 1.4
         }}>
-          新規登録
+          アカウント登録
         </h1>
 
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <div>
-            <label style={{
+        <form onSubmit={handleSubmit} style={{ marginBottom: '30px' }}>
+          <div style={{ marginBottom: '20px' }}>
+            <label htmlFor="name" style={{
               display: 'block',
-              fontSize: '0.875rem',
-              fontWeight: '500',
-              color: '#374151',
-              marginBottom: '0.5rem'
+              marginBottom: '8px',
+              color: '#456',
+              fontSize: '16px',
+              fontWeight: 500
             }}>
               お名前
             </label>
             <input
               type="text"
+              id="name"
               name="name"
               value={formData.name}
               onChange={handleChange}
               required
               style={{
                 width: '100%',
-                padding: '0.5rem',
-                borderRadius: '0.375rem',
-                border: '1px solid #d1d5db',
-                outline: 'none'
+                padding: '12px 15px',
+                fontSize: '16px',
+                border: '1px solid #ddd',
+                borderRadius: '8px',
+                boxSizing: 'border-box',
+                transition: 'border-color 0.3s ease'
               }}
             />
           </div>
 
-          <div>
-            <label style={{
+          <div style={{ marginBottom: '20px' }}>
+            <label htmlFor="password" style={{
               display: 'block',
-              fontSize: '0.875rem',
-              fontWeight: '500',
-              color: '#374151',
-              marginBottom: '0.5rem'
-            }}>
-              メールアドレス
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              style={{
-                width: '100%',
-                padding: '0.5rem',
-                borderRadius: '0.375rem',
-                border: '1px solid #d1d5db',
-                outline: 'none'
-              }}
-            />
-          </div>
-
-          <div>
-            <label style={{
-              display: 'block',
-              fontSize: '0.875rem',
-              fontWeight: '500',
-              color: '#374151',
-              marginBottom: '0.5rem'
+              marginBottom: '8px',
+              color: '#456',
+              fontSize: '16px',
+              fontWeight: 500
             }}>
               パスワード
             </label>
             <input
               type="password"
+              id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               required
-              minLength={6}
               style={{
                 width: '100%',
-                padding: '0.5rem',
-                borderRadius: '0.375rem',
-                border: '1px solid #d1d5db',
-                outline: 'none'
+                padding: '12px 15px',
+                fontSize: '16px',
+                border: '1px solid #ddd',
+                borderRadius: '8px',
+                boxSizing: 'border-box',
+                transition: 'border-color 0.3s ease'
               }}
             />
           </div>
 
-          <div>
-            <label style={{
+          <div style={{ marginBottom: '20px' }}>
+            <label htmlFor="password_confirmation" style={{
               display: 'block',
-              fontSize: '0.875rem',
-              fontWeight: '500',
-              color: '#374151',
-              marginBottom: '0.5rem'
+              marginBottom: '8px',
+              color: '#456',
+              fontSize: '16px',
+              fontWeight: 500
             }}>
               パスワード（確認）
             </label>
             <input
               type="password"
+              id="password_confirmation"
               name="password_confirmation"
               value={formData.password_confirmation}
               onChange={handleChange}
               required
-              minLength={6}
               style={{
                 width: '100%',
-                padding: '0.5rem',
-                borderRadius: '0.375rem',
-                border: '1px solid #d1d5db',
-                outline: 'none'
+                padding: '12px 15px',
+                fontSize: '16px',
+                border: '1px solid #ddd',
+                borderRadius: '8px',
+                boxSizing: 'border-box',
+                transition: 'border-color 0.3s ease'
               }}
             />
           </div>
+
+          {error && (
+            <div style={{
+              color: '#e74c3c',
+              backgroundColor: '#fdf3f2',
+              padding: '15px',
+              borderRadius: '8px',
+              marginBottom: '20px',
+              fontSize: '14px'
+            }}>
+              {error}
+            </div>
+          )}
 
           <button
             type="submit"
             disabled={isLoading}
             style={{
-              width: '100%',
-              padding: '0.75rem 1.5rem',
-              backgroundColor: '#3b82f6',
-              color: 'white',
+              background: 'linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%)',
+              color: '#fff',
               border: 'none',
-              borderRadius: '0.375rem',
-              fontWeight: '500',
+              padding: '14px 25px',
+              fontSize: '15px',
+              fontWeight: 600,
               cursor: 'pointer',
-              opacity: isLoading ? 0.5 : 1
+              borderRadius: '50px',
+              transition: 'all 0.3s ease',
+              width: '100%',
+              maxWidth: '200px',
+              boxShadow: '0 5px 15px rgba(106, 193, 208, 0.2)',
+              opacity: isLoading ? 0.7 : 1
             }}
-            onMouseOver={e => {
+            onMouseOver={(e) => {
               if (!isLoading) {
-                e.currentTarget.style.backgroundColor = '#2563eb';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 8px 20px rgba(106, 193, 208, 0.3)';
               }
             }}
-            onMouseOut={e => {
+            onMouseOut={(e) => {
               if (!isLoading) {
-                e.currentTarget.style.backgroundColor = '#3b82f6';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 5px 15px rgba(106, 193, 208, 0.2)';
               }
             }}
           >

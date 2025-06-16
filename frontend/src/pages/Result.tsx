@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { BaseProps } from '../types';
 
 // 画像のインポート
 import kingImage from '../assets/img/character-king.png';
@@ -28,10 +29,6 @@ interface CharacterImages {
     male: CharacterImage;
     female: CharacterImage;
   };
-}
-
-interface ResultProps {
-  basePath: string;
 }
 
 const characterImages: CharacterImages = {
@@ -95,7 +92,7 @@ const characterImages: CharacterImages = {
   }
 };
 
-const Result: React.FC<ResultProps> = ({ basePath }) => {
+const Result: React.FC<BaseProps> = ({ basePath }) => {
   const [searchParams] = useSearchParams();
   const [displayType, setDisplayType] = useState<string>('');
   const [scores, setScores] = useState<{ [key: string]: number }>({});
