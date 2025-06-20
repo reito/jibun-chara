@@ -89,7 +89,8 @@ const Invite: React.FC<BaseProps> = ({ basePath }) => {
                 border: '1px solid #ddd',
                 borderRadius: '8px',
                 boxSizing: 'border-box',
-                transition: 'border-color 0.3s ease'
+                transition: 'border-color 0.3s ease',
+                backgroundColor: '#fff'
               }}
               placeholder="例：〇〇相談所"
             />
@@ -118,7 +119,8 @@ const Invite: React.FC<BaseProps> = ({ basePath }) => {
                 border: '1px solid #ddd',
                 borderRadius: '8px',
                 boxSizing: 'border-box',
-                transition: 'border-color 0.3s ease'
+                transition: 'border-color 0.3s ease',
+                backgroundColor: '#fff'
               }}
               placeholder="例：example"
             />
@@ -147,7 +149,8 @@ const Invite: React.FC<BaseProps> = ({ basePath }) => {
                 border: '1px solid #ddd',
                 borderRadius: '8px',
                 boxSizing: 'border-box',
-                transition: 'border-color 0.3s ease'
+                transition: 'border-color 0.3s ease',
+                backgroundColor: '#fff'
               }}
               placeholder="example@example.com"
             />

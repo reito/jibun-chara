@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BaseProps } from '../types';
 
 interface Question {
@@ -61,10 +61,11 @@ const questions: Question[] = [
 ];
 
 const QuizMale: React.FC<BaseProps> = ({ basePath }) => {
-  const [answers, setAnswers] = useState<{ [key: string]: string }>({});
+  const navigate = useNavigate();
+  const { slug } = useParams<{ slug: string }>();
+  const [answers, setAnswers] = useState<Record<string, string>>({});
   const [progress, setProgress] = useState(0);
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     // 質問をシャッフル
@@ -87,7 +88,11 @@ const QuizMale: React.FC<BaseProps> = ({ basePath }) => {
     // 未回答の質問がないかチェック
     const unansweredQuestions = shuffledQuestions.filter(q => !answers[`q${q.id}`]);
     if (unansweredQuestions.length > 0) {
-      alert(`以下の質問に回答してください：\n質問 ${unansweredQuestions.map(q => q.id).join(', ')}`);
+      const unansweredIndices = unansweredQuestions.map(q => {
+        const index = shuffledQuestions.findIndex(sq => sq.id === q.id);
+        return index + 1;
+      });
+      alert(`以下の質問に回答してください：\n質問 ${unansweredIndices.join(', ')}`);
       return;
     }
 
@@ -124,7 +129,7 @@ const QuizMale: React.FC<BaseProps> = ({ basePath }) => {
     };
 
     // 結果ページへ遷移
-    navigate(`${basePath}/result?gender=male&king=${percentages.king}&knight=${percentages.knight}&prince=${percentages.prince}`);
+    navigate(`/${slug}/result?gender=male&king=${percentages.king}&knight=${percentages.knight}&prince=${percentages.prince}`);
   };
 
   return (
@@ -298,10 +303,40 @@ const QuizMale: React.FC<BaseProps> = ({ basePath }) => {
                     onChange={() => handleAnswerChange(question.id, value)}
                     style={{
                       marginRight: '12px',
-                      transform: 'scale(1.2)',
-                      accentColor: '#5fb5d0'
+                      accentColor: '#5fb5d0',
+                      backgroundColor: '#fff',
+                      WebkitAppearance: 'none',
+                      MozAppearance: 'none',
+                      appearance: 'none',
+                      width: '16px',
+                      height: '16px',
+                      border: '2px solid #5fb5d0',
+                      borderRadius: '50%',
+                      outline: 'none',
+                      cursor: 'pointer',
+                      position: 'relative',
+                      boxSizing: 'border-box'
                     }}
                   />
+                  <style>
+                    {`
+                      input[type="radio"]:checked {
+                        background-color: #fff;
+                        position: relative;
+                      }
+                      input[type="radio"]:checked::after {
+                        content: '';
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 8px;
+                        height: 8px;
+                        background-color: #5fb5d0;
+                        border-radius: 50%;
+                      }
+                    `}
+                  </style>
                   {value === 'yes' ? 'そう思う' : value === 'neutral' ? 'どちらとも言えない' : 'そう思わない'}
                 </label>
               ))}
@@ -319,10 +354,11 @@ const QuizMale: React.FC<BaseProps> = ({ basePath }) => {
             transition: 'all 0.3s ease',
             display: 'block',
             margin: '30px auto',
-            width: '100%',
-            maxWidth: '280px',
+            width: 'auto',
+            minWidth: '200px',
             letterSpacing: '1px',
-            boxShadow: '0 5px 15px rgba(106, 193, 208, 0.3)'
+            boxShadow: '0 5px 15px rgba(106, 193, 208, 0.3)',
+            textAlign: 'center'
           }}>
             診断結果を見る
           </button>

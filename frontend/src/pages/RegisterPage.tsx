@@ -120,7 +120,8 @@ const RegisterPage: React.FC = () => {
                 border: '1px solid #ddd',
                 borderRadius: '8px',
                 boxSizing: 'border-box',
-                transition: 'border-color 0.3s ease'
+                transition: 'border-color 0.3s ease',
+                backgroundColor: '#fff'
               }}
             />
           </div>
@@ -149,7 +150,8 @@ const RegisterPage: React.FC = () => {
                 border: '1px solid #ddd',
                 borderRadius: '8px',
                 boxSizing: 'border-box',
-                transition: 'border-color 0.3s ease'
+                transition: 'border-color 0.3s ease',
+                backgroundColor: '#fff'
               }}
             />
           </div>
@@ -178,7 +180,8 @@ const RegisterPage: React.FC = () => {
                 border: '1px solid #ddd',
                 borderRadius: '8px',
                 boxSizing: 'border-box',
-                transition: 'border-color 0.3s ease'
+                transition: 'border-color 0.3s ease',
+                backgroundColor: '#fff'
               }}
             />
           </div>

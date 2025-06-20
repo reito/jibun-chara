@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, useParams, useNavigate, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useParams, useNavigate, Outlet, useLocation } from 'react-router-dom';
 import QuizFemale from './pages/QuizFemale';
 import QuizMale from './pages/QuizMale';
 import Result from './pages/Result';
@@ -14,6 +14,7 @@ const SlugValidator: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isValidSlug, setIsValidSlug] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const validateSlug = async () => {
@@ -21,6 +22,14 @@ const SlugValidator: React.FC = () => {
 
       if (!slug) {
         console.log('No slug provided');
+        setIsLoading(false);
+        return;
+      }
+
+      // resultパスの場合は検証をスキップ
+      if (location.pathname.includes('/result')) {
+        console.log('Result page detected, skipping slug validation');
+        setIsValidSlug(true);
         setIsLoading(false);
         return;
       }
@@ -43,7 +52,7 @@ const SlugValidator: React.FC = () => {
     };
 
     validateSlug();
-  }, [slug, navigate]);
+  }, [slug, navigate, location.pathname]);
 
   console.log('SlugValidator render:', { slug, isLoading, isValidSlug });
 
