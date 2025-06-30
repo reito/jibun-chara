@@ -26,14 +26,6 @@ const SlugValidator: React.FC = () => {
         return;
       }
 
-      // resultパスの場合は検証をスキップ
-      if (location.pathname.includes('/result')) {
-        console.log('Result page detected, skipping slug validation');
-        setIsValidSlug(true);
-        setIsLoading(false);
-        return;
-      }
-
       try {
         console.log('Making API request to validate slug');
         const response = await apiClient.get(`/tenants/validate/${slug}`);
