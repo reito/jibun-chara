@@ -1,4 +1,4 @@
-FROM node:20 as build
+FROM node:20-alpine as build
 
 WORKDIR /app
 
@@ -6,7 +6,7 @@ WORKDIR /app
 RUN corepack enable && corepack prepare yarn@3.6.4 --activate
 
 COPY package.json yarn.lock ./
-RUN yarn config set nodeLinker node-modules && yarn install
+RUN yarn config set nodeLinker node-modules && yarn install --frozen-lockfile
 
 COPY . .
 
