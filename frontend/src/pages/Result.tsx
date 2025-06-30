@@ -4,20 +4,20 @@ import { useNavigate } from 'react-router-dom';
 import { BaseProps } from '../types';
 
 // 画像のインポート
-const kingImage = '/src/assets/img/character-king.png';
-const knightImage = '/src/assets/img/character-knight.png';
-const princeImage = '/src/assets/img/character-prince.png';
-const idolImage = '/src/assets/img/character-idol.png';
-const careerImage = '/src/assets/img/character-career.png';
-const motherImage = '/src/assets/img/character-mother.png';
-const kingKnightImage = '/src/assets/img/character-king-knight.png';
-const knightPrinceImage = '/src/assets/img/character-knight-prince.png';
-const kingPrinceImage = '/src/assets/img/character-king-prince.png';
-const idolCareerImage = '/src/assets/img/character-idol-career.png';
-const careerMotherImage = '/src/assets/img/character-career-mother.png';
-const motherIdolImage = '/src/assets/img/character-mother-idol.png';
-const characterBalanceMaleImage = '/src/assets/img/character-balance-male.png';
-const characterBalanceFemaleImage = '/src/assets/img/character-balance-female.png';
+import kingImage from '../assets/img/character-king.png';
+import knightImage from '../assets/img/character-knight.png';
+import princeImage from '../assets/img/character-prince.png';
+import idolImage from '../assets/img/character-idol.png';
+import careerImage from '../assets/img/character-career.png';
+import motherImage from '../assets/img/character-mother.png';
+import kingKnightImage from '../assets/img/character-king-knight.png';
+import knightPrinceImage from '../assets/img/character-knight-prince.png';
+import kingPrinceImage from '../assets/img/character-king-prince.png';
+import idolCareerImage from '../assets/img/character-idol-career.png';
+import careerMotherImage from '../assets/img/character-career-mother.png';
+import motherIdolImage from '../assets/img/character-mother-idol.png';
+import characterBalanceMaleImage from '../assets/img/character-balance-male.png';
+import characterBalanceFemaleImage from '../assets/img/character-balance-female.png';
 
 interface CharacterImage {
   image: string;
