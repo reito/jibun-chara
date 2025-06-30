@@ -464,122 +464,135 @@ const Result: React.FC<BaseProps> = ({ basePath }) => {
             あなたの恋愛・婚活の可能性を広げるために...<br />気になる方をチェック！ ✨
           </p>
 
-          <a
-            href="https://lin.ee/qSZORFf"
-            style={{
-              background: 'linear-gradient(135deg, #FF88B3 0%, #FF69B4 100%)',
-              color: '#fff',
-              border: 'none',
-              padding: '16px 25px',
-              fontSize: '15px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              borderRadius: '50px',
-              transition: 'all 0.3s ease',
-              display: 'block',
-              textDecoration: 'none',
-              margin: '0 auto',
-              width: '100%',
-              maxWidth: '320px',
-              boxSizing: 'border-box',
-              boxShadow: '0 5px 15px rgba(255, 136, 179, 0.2)',
-              textAlign: 'center',
-              letterSpacing: '0.5px',
-              lineHeight: 1.5
-            }}
-          >
-            運命のパートナーが見つけやすくなる<br />トータルコーディネート
-          </a>
-          <p style={{
-            fontSize: '14px',
-            color: '#666',
-            display: 'block',
-            fontWeight: 'normal',
-            lineHeight: 1.6,
-            margin: '8px auto 25px',
-            maxWidth: '320px',
-            textAlign: 'center'
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
+            alignItems: 'center'
           }}>
-            外見＆内面！あなたが引き寄せたい理想の相手<br />と出会うポイントを詳しく解説！
-          </p>
+            <div style={{
+              width: '100%',
+              maxWidth: '320px'
+            }}>
+              <a
+                href="https://lin.ee/qSZORFf"
+                style={{
+                  background: 'linear-gradient(135deg, #FF88B3 0%, #FF69B4 100%)',
+                  color: '#fff',
+                  border: 'none',
+                  padding: '16px 20px',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  borderRadius: '50px',
+                  transition: 'all 0.3s ease',
+                  display: 'block',
+                  textDecoration: 'none',
+                  width: '100%',
+                  boxSizing: 'border-box',
+                  boxShadow: '0 5px 15px rgba(255, 136, 179, 0.2)',
+                  textAlign: 'center',
+                  letterSpacing: '0.5px',
+                  lineHeight: 1.4,
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                運命のパートナーが見つけやすくなる<br />トータルコーディネート
+              </a>
+              <p style={{
+                fontSize: '14px',
+                color: '#666',
+                fontWeight: 'normal',
+                lineHeight: 1.6,
+                margin: '8px 0 0 0',
+                textAlign: 'left'
+              }}>
+                外見＆内面！あなたが引き寄せたい理想の相手と出会うポイントを詳しく解説！
+              </p>
+            </div>
 
-          <a
-            href="https://trial-marriage-hunting.vercel.app/"
-            style={{
-              background: 'linear-gradient(135deg, #FF88B3 0%, #FF69B4 100%)',
-              color: '#fff',
-              border: 'none',
-              padding: '16px 25px',
-              fontSize: '15px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              borderRadius: '50px',
-              transition: 'all 0.3s ease',
-              display: 'block',
-              textDecoration: 'none',
-              margin: '0 auto',
+            <div style={{
               width: '100%',
-              maxWidth: '320px',
-              boxSizing: 'border-box',
-              boxShadow: '0 5px 15px rgba(255, 136, 179, 0.2)',
-              textAlign: 'center',
-              letterSpacing: '0.5px',
-              lineHeight: 1.5
-            }}
-          >
-            婚活に興味はあるけど不安な方へ<br />おためし婚活カウンセリング
-          </a>
-          <p style={{
-            fontSize: '14px',
-            color: '#666',
-            display: 'block',
-            fontWeight: 'normal',
-            lineHeight: 1.6,
-            margin: '8px auto 25px',
-            maxWidth: '320px',
-            textAlign: 'center'
-          }}>
-            理想の出会いに向けて、あなたに合った婚活方法を提案しながらおためし婚活ができます！
-          </p>
+              maxWidth: '320px'
+            }}>
+              <a
+                href="https://trial-marriage-hunting.vercel.app/"
+                style={{
+                  background: 'linear-gradient(135deg, #FF88B3 0%, #FF69B4 100%)',
+                  color: '#fff',
+                  border: 'none',
+                  padding: '16px 20px',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  borderRadius: '50px',
+                  transition: 'all 0.3s ease',
+                  display: 'block',
+                  textDecoration: 'none',
+                  width: '100%',
+                  boxSizing: 'border-box',
+                  boxShadow: '0 5px 15px rgba(255, 136, 179, 0.2)',
+                  textAlign: 'center',
+                  letterSpacing: '0.5px',
+                  lineHeight: 1.4,
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                婚活に興味はあるけど不安な方へ<br />おためし婚活カウンセリング
+              </a>
+              <p style={{
+                fontSize: '14px',
+                color: '#666',
+                fontWeight: 'normal',
+                lineHeight: 1.6,
+                margin: '8px 0 0 0',
+                textAlign: 'left'
+              }}>
+                理想の出会いに向けて、あなたに合った婚活方法を提案しながらおためし婚活ができます！
+              </p>
+            </div>
 
-          <a
-            href="https://square.link/u/vQEat01w"
-            style={{
-              background: 'linear-gradient(135deg, #FF88B3 0%, #FF69B4 100%)',
-              color: '#fff',
-              border: 'none',
-              padding: '16px 25px',
-              fontSize: '15px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              borderRadius: '50px',
-              transition: 'all 0.3s ease',
-              display: 'block',
-              textDecoration: 'none',
-              margin: '0 auto',
+            <div style={{
               width: '100%',
-              maxWidth: '320px',
-              boxSizing: 'border-box',
-              boxShadow: '0 5px 15px rgba(255, 136, 179, 0.2)',
-              textAlign: 'center',
-              letterSpacing: '0.5px',
-              lineHeight: 1.5
-            }}
-          >
-            自分の取り扱い説明書を手に入れて<br />パートナー探しに活かす
-          </a>
-          <p style={{
-            fontSize: '14px',
-            color: '#666',
-            display: 'block',
-            fontWeight: 'normal',
-            lineHeight: 1.6,
-            margin: '8px auto 25px',
-            maxWidth: '320px',
-            textAlign: 'center'
-          }}>
-            あなたのキャラタイプを婚活に活かすヒント<br />をもっと深く知りたくありませんか？
-          </p>
+              maxWidth: '320px'
+            }}>
+              <a
+                href="https://square.link/u/vQEat01w"
+                style={{
+                  background: 'linear-gradient(135deg, #FF88B3 0%, #FF69B4 100%)',
+                  color: '#fff',
+                  border: 'none',
+                  padding: '16px 20px',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  borderRadius: '50px',
+                  transition: 'all 0.3s ease',
+                  display: 'block',
+                  textDecoration: 'none',
+                  width: '100%',
+                  boxSizing: 'border-box',
+                  boxShadow: '0 5px 15px rgba(255, 136, 179, 0.2)',
+                  textAlign: 'center',
+                  letterSpacing: '0.5px',
+                  lineHeight: 1.4,
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                自分の取り扱い説明書を手に入れて<br />パートナー探しに活かす
+              </a>
+              <p style={{
+                fontSize: '14px',
+                color: '#666',
+                fontWeight: 'normal',
+                lineHeight: 1.6,
+                margin: '8px 0 0 0',
+                textAlign: 'left'
+              }}>
+                あなたのキャラタイプを婚活に活かすヒントをもっと深く知りたくありませんか？
+              </p>
+            </div>
+          </div>
         </div>
 
         <div style={{
