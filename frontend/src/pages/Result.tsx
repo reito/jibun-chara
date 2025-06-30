@@ -486,7 +486,9 @@ const Result: React.FC<BaseProps> = ({ basePath }) => {
                   cursor: 'pointer',
                   borderRadius: '50px',
                   transition: 'all 0.3s ease',
-                  display: 'block',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   textDecoration: 'none',
                   width: '100%',
                   boxSizing: 'border-box',
@@ -494,7 +496,8 @@ const Result: React.FC<BaseProps> = ({ basePath }) => {
                   textAlign: 'center',
                   letterSpacing: '0.5px',
                   lineHeight: 1.4,
-                  whiteSpace: 'nowrap'
+                  whiteSpace: 'nowrap',
+                  minHeight: '50px'
                 }}
               >
                 運命のパートナーが見つけやすくなる<br />トータルコーディネート
@@ -527,7 +530,9 @@ const Result: React.FC<BaseProps> = ({ basePath }) => {
                   cursor: 'pointer',
                   borderRadius: '50px',
                   transition: 'all 0.3s ease',
-                  display: 'block',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   textDecoration: 'none',
                   width: '100%',
                   boxSizing: 'border-box',
@@ -535,7 +540,8 @@ const Result: React.FC<BaseProps> = ({ basePath }) => {
                   textAlign: 'center',
                   letterSpacing: '0.5px',
                   lineHeight: 1.4,
-                  whiteSpace: 'nowrap'
+                  whiteSpace: 'nowrap',
+                  minHeight: '50px'
                 }}
               >
                 婚活に興味はあるけど不安な方へ<br />おためし婚活カウンセリング
@@ -568,7 +574,9 @@ const Result: React.FC<BaseProps> = ({ basePath }) => {
                   cursor: 'pointer',
                   borderRadius: '50px',
                   transition: 'all 0.3s ease',
-                  display: 'block',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   textDecoration: 'none',
                   width: '100%',
                   boxSizing: 'border-box',
@@ -576,7 +584,8 @@ const Result: React.FC<BaseProps> = ({ basePath }) => {
                   textAlign: 'center',
                   letterSpacing: '0.5px',
                   lineHeight: 1.4,
-                  whiteSpace: 'nowrap'
+                  whiteSpace: 'nowrap',
+                  minHeight: '50px'
                 }}
               >
                 自分の取り扱い説明書を手に入れて<br />パートナー探しに活かす
