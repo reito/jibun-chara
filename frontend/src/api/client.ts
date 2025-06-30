@@ -4,6 +4,11 @@ import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1';
 
+// デバッグ用ログ
+console.log('API_BASE_URL:', API_BASE_URL);
+console.log('Environment:', import.meta.env.MODE);
+console.log('All env vars:', import.meta.env);
+
 const client: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -15,6 +20,8 @@ const client: AxiosInstance = axios.create({
 // リクエストインターセプター
 client.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    console.log('Making request to:', config.url);
+    console.log('Full URL:', (config.baseURL || '') + (config.url || ''));
     // 必要に応じて認証トークンなどを追加
     return config;
   },
