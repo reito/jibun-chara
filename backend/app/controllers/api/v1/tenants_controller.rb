@@ -19,7 +19,7 @@ module Api
           expires_at: expires_at
         )
 
-        invitation_url = "#{request.base_url}/invite/#{token}"
+        invitation_url = generate_invitation_url(token)
         render json: { invitation_url: invitation_url }
       end
 
@@ -30,6 +30,21 @@ module Api
           render json: { valid: true, tenant_slug: invitation.tenant.slug }
         else
           render json: { valid: false }
+        end
+      end
+
+      private
+
+      def generate_invitation_url(token)
+        frontend_url = ENV['FRONTEND_URL'] || default_frontend_url
+        "#{frontend_url}/invite/#{token}"
+      end
+
+      def default_frontend_url
+        if Rails.env.development?
+          "http://localhost:5173"
+        else
+          "https://jubun-chara-frontend.onrender.com"
         end
       end
     end
