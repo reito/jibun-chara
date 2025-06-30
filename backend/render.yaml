@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: jubun-chara-backend
+    env: ruby
+    buildCommand: bundle install
+    startCommand: bundle exec rails s -p 10000 -b 0.0.0.0
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: jubun-chara-db
+          property: connectionString
+      - key: RAILS_ENV
+        value: production
+      - key: FRONTEND_URL
+        value: https://jubun-chara-frontend.onrender.com
+      - key: ALLOWED_ORIGINS
+        value: http://localhost:5173,https://jubun-chara-frontend.onrender.com
+    autoDeploy: true
+    migrations:
+      runCommand: bundle exec rails db:migrate
+
+databases:
+  - name: jubun-chara-db
+    databaseName: jibun_chara_production
+    user: postgres 

@@ -7,6 +7,24 @@ module Api
         Rails.logger.info "Environment: #{Rails.env}"
         Rails.logger.info "FRONTEND_URL: #{ENV['FRONTEND_URL']}"
         
+        # データベース接続テスト
+        Rails.logger.info "=== Database Connection Test ==="
+        Rails.logger.info "DATABASE_URL: #{ENV['DATABASE_URL']}"
+        Rails.logger.info "POSTGRES_PASSWORD: #{ENV['POSTGRES_PASSWORD'] ? 'SET' : 'NOT SET'}"
+        
+        begin
+          ActiveRecord::Base.connection.execute("SELECT 1")
+          Rails.logger.info "Database connection successful"
+        rescue => e
+          Rails.logger.error "Database connection failed: #{e.message}"
+          render json: { 
+            status: 'error',
+            errors: ['Database connection failed'],
+            message: e.message
+          }, status: :internal_server_error
+          return
+        end
+        
         # パラメータの存在確認
         unless params[:tenant]
           Rails.logger.error "Missing tenant parameter"
