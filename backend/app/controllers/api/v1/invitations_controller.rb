@@ -7,6 +7,16 @@ module Api
         Rails.logger.info "Environment: #{Rails.env}"
         Rails.logger.info "FRONTEND_URL: #{ENV['FRONTEND_URL']}"
         
+        # パラメータの存在確認
+        unless params[:tenant]
+          Rails.logger.error "Missing tenant parameter"
+          render json: { 
+            status: 'error',
+            errors: ['tenant parameter is required']
+          }, status: :bad_request
+          return
+        end
+        
         @tenant = Tenant.new(tenant_params)
         Rails.logger.info "Tenant object created: #{@tenant.inspect}"
         Rails.logger.info "Tenant valid?: #{@tenant.valid?}"
@@ -41,6 +51,9 @@ module Api
 
       def tenant_params
         params.require(:tenant).permit(:name, :slug, :admin_email)
+      rescue ActionController::ParameterMissing => e
+        Rails.logger.error "Parameter missing: #{e.message}"
+        raise e
       end
 
       def generate_invite_url(token)
