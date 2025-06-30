@@ -26,7 +26,19 @@ const Invite: React.FC<BaseProps> = ({ basePath }) => {
       setInviteUrl(response.data.data.invite_url);
       setSuccess('招待リンクが生成されました。以下のリンクを相談所運営者に送付してください。');
     } catch (error: any) {
-      setError(error.response?.data?.errors?.join(', ') || '招待リンクの生成に失敗しました。');
+      console.error('Full error object:', error);
+      console.error('Error response:', error.response);
+      console.error('Error response data:', error.response?.data);
+      
+      if (error.response?.data?.errors) {
+        setError(error.response.data.errors.join(', '));
+      } else if (error.response?.data?.message) {
+        setError(error.response.data.message);
+      } else if (error.message) {
+        setError(error.message);
+      } else {
+        setError('招待リンクの生成に失敗しました。');
+      }
     }
   };
 

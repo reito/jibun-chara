@@ -4,9 +4,13 @@ module Api
       def create
         Rails.logger.info "=== Invitation creation started ==="
         Rails.logger.info "Params: #{params.inspect}"
+        Rails.logger.info "Environment: #{Rails.env}"
+        Rails.logger.info "FRONTEND_URL: #{ENV['FRONTEND_URL']}"
         
         @tenant = Tenant.new(tenant_params)
         Rails.logger.info "Tenant object created: #{@tenant.inspect}"
+        Rails.logger.info "Tenant valid?: #{@tenant.valid?}"
+        Rails.logger.info "Tenant errors: #{@tenant.errors.full_messages}" unless @tenant.valid?
         
         if @tenant.save
           Rails.logger.info "Tenant saved successfully with ID: #{@tenant.id}"
@@ -28,12 +32,9 @@ module Api
           }, status: :unprocessable_entity
         end
       rescue => e
-        Rails.logger.error "Exception in invitation creation: #{e.message}"
+        Rails.logger.error "Exception in invitation creation: #{e.class.name}: #{e.message}"
         Rails.logger.error e.backtrace.join("\n")
-        render json: { 
-          status: 'error',
-          errors: ['Internal server error'] 
-        }, status: :internal_server_error
+        raise e  # ApplicationControllerのエラーハンドリングに委譲
       end
 
       private
