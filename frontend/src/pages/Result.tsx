@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, Link, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { BaseProps } from '../types';
 
@@ -97,6 +97,7 @@ const Result: React.FC<BaseProps> = ({ basePath }) => {
   const [displayType, setDisplayType] = useState<string>('');
   const [scores, setScores] = useState<{ [key: string]: number }>({});
   const [characterData, setCharacterData] = useState<CharacterImage | null>(null);
+  const { slug } = useParams();
 
   useEffect(() => {
     // ページの最上部にスクロール
@@ -609,7 +610,7 @@ const Result: React.FC<BaseProps> = ({ basePath }) => {
           marginTop: '30px'
         }}>
           <Link
-            to={basePath + '/'}
+            to={`/${slug}`}
             style={{
               background: 'linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%)',
               color: '#fff',
