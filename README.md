@@ -10,7 +10,7 @@
 
 現在はスモールスタートとしてサービス利用料のオンライン決済画面は実装しておらず、サービスを使いたい相談所様から依頼があった場合のみ、希望されるURLスラッグをお聞きした上で招待リンクを送信して登録してもらう形となっております。将来的に規模が増えた場合に実装予定です。
 
-また、各相談所様が診断結果にてCTRボタン(自社のLINE公式やホームページなどのリンク)やそのデザインをカスタマイズできるように管理者画面の実装も済ませる予定です。
+また、各相談所様が診断結果ページのCTRボタン(自社のLINE公式やホームページなどのリンク)やそのデザインをカスタマイズできるようにし、会員様向けのイベント予約機能も含めた管理者画面の実装も済ませる予定です。
 
 緊急で作ったため、リファクタリングと管理者画面が作りきれていませんが
 
@@ -105,14 +105,22 @@ jibun-chara/
    - 性別選択
    - 診断の説明
 
+   <img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/86167d35-6e9a-448b-b7d2-241d212d08d4" />
+
 2. **診断クイズ** (`QuizMale.tsx`, `QuizFemale.tsx`)
    - 15問×3カテゴリの質問
    - プログレスバー表示
+
+   <img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/8b7ef3c9-cc01-499c-af23-83d62c27a417" />
 
 3. **結果画面** (`Result.tsx`)
    - キャラクタータイプの表示
    - 各タイプの割合表示
    - 婚活サポートへのリンク
+
+   <img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/7914c79f-2778-4570-a57e-549a1eec88b0" />
+
+   <img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/89307cf4-8742-4b4b-b1e5-9bd9798e9fc0" />
 
 ## デプロイ
 
