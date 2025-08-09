@@ -105,22 +105,22 @@ jibun-chara/
    - 性別選択
    - 診断の説明
 
-   <img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/86167d35-6e9a-448b-b7d2-241d212d08d4" />
+   <img width="1436" height="804" alt="Image" src="https://github.com/user-attachments/assets/f3bba00f-2575-412c-a9a0-bdbb7f5b5c4d" />
 
 2. **診断クイズ** (`QuizMale.tsx`, `QuizFemale.tsx`)
    - 15問×3カテゴリの質問
    - プログレスバー表示
 
-   <img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/8b7ef3c9-cc01-499c-af23-83d62c27a417" />
+   <img width="1425" height="810" alt="Image" src="https://github.com/user-attachments/assets/fd3c06dc-48ed-4f91-8c35-cc83f2bfb76d" />
 
 3. **結果画面** (`Result.tsx`)
    - キャラクタータイプの表示
    - 各タイプの割合表示
    - 婚活サポートへのリンク
 
-   <img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/7914c79f-2778-4570-a57e-549a1eec88b0" />
+   <img width="1429" height="807" alt="Image" src="https://github.com/user-attachments/assets/e1d12e80-6f2d-4f26-b64e-281f697ae522" />
 
-   <img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/89307cf4-8742-4b4b-b1e5-9bd9798e9fc0" />
+   <img width="1429" height="809" alt="Image" src="https://github.com/user-attachments/assets/64b6bc07-ce9f-467f-aa7d-1cbd368c272b" />
 
 ## デプロイ
 
