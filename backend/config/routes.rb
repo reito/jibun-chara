@@ -3,19 +3,19 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
-    resources :invitations, only: [:new, :create]
+    resources :invitations, only: [ :new, :create ]
   end
 
   namespace :users do
-    get 'register', to: 'registrations#new', as: :register_users
-    post 'register', to: 'registrations#create'
+    get "register", to: "registrations#new", as: :register_users
+    post "register", to: "registrations#create"
   end
 
   # 管理画面など
-  get '/dashboard', to: 'dashboard#index'
+  get "/dashboard", to: "dashboard#index"
 
   # 招待リンク関連
-  get '/invite/:token', to: 'pages#invitation'
+  get "/invite/:token", to: "pages#invitation"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -26,19 +26,19 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  scope '/:tenant_slug' do
-    get '/', to: 'pages#home'
+  scope "/:tenant_slug" do
+    get "/", to: "pages#home"
   end
 
   namespace :api do
     namespace :v1 do
-      resources :invitations, only: [:create]
-      resources :registrations, only: [:create]
+      resources :invitations, only: [ :create ]
+      resources :registrations, only: [ :create ]
       get "cta_buttons/index"
-      get '/tenants/:tenant_slug/cta_buttons', to: 'cta_buttons#index'
-      get '/tenants/validate/:slug', to: 'tenants#validate'
-      get '/tenants/:tenant_slug/generate_invitation', to: 'tenants#generate_invitation_link'
-      get '/invitations/validate/:token', to: 'tenants#validate_invitation'
+      get "/tenants/:tenant_slug/cta_buttons", to: "cta_buttons#index"
+      get "/tenants/validate/:slug", to: "tenants#validate"
+      get "/tenants/:tenant_slug/generate_invitation", to: "tenants#generate_invitation_link"
+      get "/invitations/validate/:token", to: "tenants#validate_invitation"
     end
   end
 end

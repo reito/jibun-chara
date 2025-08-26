@@ -8,7 +8,7 @@ module Api
 
       def generate_invitation_link
         tenant = Tenant.find_by(slug: params[:tenant_slug])
-        return render json: { error: 'Tenant not found' }, status: :not_found unless tenant
+        return render json: { error: "Tenant not found" }, status: :not_found unless tenant
 
         token = SecureRandom.urlsafe_base64(32)
         expires_at = 24.hours.from_now
@@ -25,7 +25,7 @@ module Api
 
       def validate_invitation
         invitation = Invitation.find_by(token: params[:token])
-        
+
         if invitation && !invitation.expired? && !invitation.used?
           render json: { valid: true, tenant_slug: invitation.tenant.slug }
         else
@@ -36,7 +36,7 @@ module Api
       private
 
       def generate_invitation_url(token)
-        frontend_url = ENV['FRONTEND_URL'] || default_frontend_url
+        frontend_url = ENV["FRONTEND_URL"] || default_frontend_url
         "#{frontend_url}/invite/#{token}"
       end
 
@@ -49,4 +49,4 @@ module Api
       end
     end
   end
-end 
+end
