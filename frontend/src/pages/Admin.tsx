@@ -1,5 +1,5 @@
-import React from 'react';
-import { BaseProps } from '../types';
+import React from 'react'
+import { BaseProps } from '../types'
 
 const Admin: React.FC<BaseProps> = ({ basePath }) => {
   return (
@@ -8,7 +8,7 @@ const Admin: React.FC<BaseProps> = ({ basePath }) => {
       <p>ここに管理機能を実装します。</p>
       <p>スラッグ: {basePath}</p>
     </div>
-  );
-};
+  )
+}
 
-export default Admin; 
+export default Admin

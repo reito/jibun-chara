@@ -1,49 +1,54 @@
-import React, { useState } from 'react';
-import { createInvitation } from '../../api/auth';
+import React, { useState } from 'react'
+import { createInvitation } from '../../api/auth'
 
 interface InvitationFormProps {
-  onSuccess: (inviteUrl: string) => void;
+  onSuccess: (inviteUrl: string) => void
 }
 
-export const InvitationForm: React.FC<InvitationFormProps> = ({ onSuccess }) => {
+export const InvitationForm: React.FC<InvitationFormProps> = ({
+  onSuccess,
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     slug: '',
-  });
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  })
+  const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setIsLoading(true);
+    e.preventDefault()
+    setError(null)
+    setIsLoading(true)
 
     try {
-      const response = await createInvitation(formData);
-      onSuccess(response.data.invite_url);
+      const response = await createInvitation(formData)
+      onSuccess(response.data.invite_url)
     } catch (err) {
-      setError('招待リンクの生成に失敗しました。');
-      console.error('Invitation error:', err);
+      setError('招待リンクの生成に失敗しました。')
+      console.error('Invitation error:', err)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
+    const { name, value } = e.target
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
-    }));
-  };
+      [name]: value,
+    }))
+  }
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-6">相談所招待リンク生成</h2>
-      
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700"
+          >
             相談所名
           </label>
           <input
@@ -58,7 +63,10 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({ onSuccess }) => 
         </div>
 
         <div>
-          <label htmlFor="slug" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="slug"
+            className="block text-sm font-medium text-gray-700"
+          >
             スラッグ（URL用）
           </label>
           <input
@@ -74,11 +82,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({ onSuccess }) => 
           />
         </div>
 
-        {error && (
-          <div className="text-red-600 text-sm">
-            {error}
-          </div>
-        )}
+        {error && <div className="text-red-600 text-sm">{error}</div>}
 
         <button
           type="submit"
@@ -89,5 +93,5 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({ onSuccess }) => 
         </button>
       </form>
     </div>
-  );
-}; 
+  )
+}

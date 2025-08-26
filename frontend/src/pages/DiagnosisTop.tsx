@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from '@emotion/styled';
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import styled from '@emotion/styled'
 
 const Container = styled.div`
   width: 100%;
@@ -10,7 +10,7 @@ const Container = styled.div`
   justify-content: center;
   padding: 20px;
   background-color: #f0f7f7;
-`;
+`
 
 const ContentWrapper = styled.div`
   max-width: 600px;
@@ -20,21 +20,21 @@ const ContentWrapper = styled.div`
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(106, 193, 208, 0.1);
   text-align: center;
-`;
+`
 
 const Title = styled.h1`
   color: #5fb5d0;
   font-size: 28px;
   margin-bottom: 20px;
   font-weight: 700;
-`;
+`
 
 const Description = styled.p`
   color: #666;
   margin-bottom: 40px;
   font-size: 16px;
   line-height: 1.8;
-`;
+`
 
 const GenderSelection = styled.div`
   display: flex;
@@ -47,12 +47,13 @@ const GenderSelection = styled.div`
     gap: 15px;
     align-items: center;
   }
-`;
+`
 
 const GenderButton = styled.button<{ gender: 'male' | 'female' }>`
   background: #fff;
-  border: 2px solid ${props => props.gender === 'female' ? '#ff85a2' : '#4a90e2'};
-  color: ${props => props.gender === 'female' ? '#ff85a2' : '#4a90e2'};
+  border: 2px solid
+    ${(props) => (props.gender === 'female' ? '#ff85a2' : '#4a90e2')};
+  color: ${(props) => (props.gender === 'female' ? '#ff85a2' : '#4a90e2')};
   padding: 20px 40px;
   font-size: 18px;
   font-weight: 500;
@@ -66,7 +67,8 @@ const GenderButton = styled.button<{ gender: 'male' | 'female' }>`
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(95, 181, 208, 0.2);
-    background: ${props => props.gender === 'female' ? '#fff5f7' : '#f5f8fc'};
+    background: ${(props) =>
+      props.gender === 'female' ? '#fff5f7' : '#f5f8fc'};
   }
 
   &::after {
@@ -86,7 +88,7 @@ const GenderButton = styled.button<{ gender: 'male' | 'female' }>`
     padding: 15px 30px;
     font-size: 16px;
   }
-`;
+`
 
 const Features = styled.div`
   margin-top: 40px;
@@ -98,7 +100,7 @@ const Features = styled.div`
     margin-top: 30px;
     padding: 15px;
   }
-`;
+`
 
 const FeaturesTitle = styled.h2`
   color: #5fb5d0;
@@ -108,14 +110,14 @@ const FeaturesTitle = styled.h2`
   @media (max-width: 480px) {
     font-size: 16px;
   }
-`;
+`
 
 const FeaturesList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
   text-align: left;
-`;
+`
 
 const FeatureItem = styled.li`
   margin-bottom: 10px;
@@ -133,27 +135,28 @@ const FeatureItem = styled.li`
   @media (max-width: 480px) {
     font-size: 14px;
   }
-`;
+`
 
 const DiagnosisTop = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
-    console.log('DiagnosisTop mounted');
-  }, []);
+    console.log('DiagnosisTop mounted')
+  }, [])
 
   const handleGenderSelect = (gender: 'male' | 'female') => {
-    console.log('Gender selected:', gender);
-    navigate(`/diagnosis/${gender}`);
-  };
+    console.log('Gender selected:', gender)
+    navigate(`/diagnosis/${gender}`)
+  }
 
-  console.log('DiagnosisTop rendering');
+  console.log('DiagnosisTop rendering')
   return (
     <Container>
       <ContentWrapper>
         <Title>じぶんキャラ診断</Title>
         <Description>
-          あなたの性格や価値観から、最も当てはまるキャラを診断します。<br />
+          あなたの性格や価値観から、最も当てはまるキャラを診断します。
+          <br />
           45の質問であなたがどのキャラに当てはまるのか分かります。
         </Description>
 
@@ -182,7 +185,7 @@ const DiagnosisTop = () => {
         </Features>
       </ContentWrapper>
     </Container>
-  );
-};
+  )
+}
 
-export default DiagnosisTop; 
+export default DiagnosisTop

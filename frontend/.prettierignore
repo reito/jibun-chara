@@ -1,0 +1,10 @@
+dist
+node_modules
+.yarn
+*.min.js
+*.min.css
+coverage
+build
+*.log
+yarn.lock
+package-lock.json

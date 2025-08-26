@@ -1,113 +1,123 @@
-import React, { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react'
+import { useSearchParams, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1';
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1'
 
 // デバッグ用ログ
-console.log('RegisterPage API_BASE_URL:', API_BASE_URL);
-console.log('RegisterPage Environment:', import.meta.env.MODE);
+console.log('RegisterPage API_BASE_URL:', API_BASE_URL)
+console.log('RegisterPage Environment:', import.meta.env.MODE)
 
 const RegisterPage: React.FC = () => {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const [token, setToken] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+  const [token, setToken] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
     name: '',
     password: '',
-    password_confirmation: ''
-  });
-  const [isLoading, setIsLoading] = useState(false);
+    password_confirmation: '',
+  })
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    const tokenParam = searchParams.get('token');
+    const tokenParam = searchParams.get('token')
     if (!tokenParam) {
-      setError('無効な招待リンクです。');
+      setError('無効な招待リンクです。')
     } else {
-      setToken(tokenParam);
+      setToken(tokenParam)
     }
-  }, [searchParams]);
+  }, [searchParams])
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setIsLoading(true);
+    e.preventDefault()
+    setError(null)
+    setIsLoading(true)
 
     try {
       const response = await axios.post(`${API_BASE_URL}/registrations`, {
         token: token,
-        user: formData
-      });
+        user: formData,
+      })
 
       if (response.data.status === 'success') {
         // テナントのスラッグを使用してダッシュボードに遷移
-        const tenantSlug = response.data.data.tenant.slug;
-        navigate(`/${tenantSlug}/dashboard`);
+        const tenantSlug = response.data.data.tenant.slug
+        navigate(`/${tenantSlug}/dashboard`)
       }
     } catch (err: any) {
       if (err.response?.data?.errors) {
-        setError(err.response.data.errors.join('\n'));
+        setError(err.response.data.errors.join('\n'))
       } else {
-        setError('登録に失敗しました。');
+        setError('登録に失敗しました。')
       }
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
+    const { name, value } = e.target
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
-    }));
-  };
+      [name]: value,
+    }))
+  }
 
   return (
-    <div style={{
-      fontFamily: "'Noto Sans JP', sans-serif",
-      backgroundColor: '#f0f7f7',
-      margin: 0,
-      padding: '20px',
-      textAlign: 'center',
-      color: '#333',
-      lineHeight: 1.6,
-      minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center'
-    }}>
-      <div style={{
-        backgroundColor: '#fff',
-        padding: '40px 30px',
-        borderRadius: '15px',
-        boxShadow: '0 8px 20px rgba(106, 193, 208, 0.1)',
-        margin: '0 auto',
-        maxWidth: '600px',
-        width: '100%',
-        boxSizing: 'border-box',
-        border: '1px solid rgba(106, 193, 208, 0.1)'
-      }}>
-        <h1 style={{
-          color: '#5fb5d0',
-          fontSize: '28px',
-          margin: '0 0 30px',
-          fontWeight: 700,
-          lineHeight: 1.4
-        }}>
+    <div
+      style={{
+        fontFamily: "'Noto Sans JP', sans-serif",
+        backgroundColor: '#f0f7f7',
+        margin: 0,
+        padding: '20px',
+        textAlign: 'center',
+        color: '#333',
+        lineHeight: 1.6,
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: '#fff',
+          padding: '40px 30px',
+          borderRadius: '15px',
+          boxShadow: '0 8px 20px rgba(106, 193, 208, 0.1)',
+          margin: '0 auto',
+          maxWidth: '600px',
+          width: '100%',
+          boxSizing: 'border-box',
+          border: '1px solid rgba(106, 193, 208, 0.1)',
+        }}
+      >
+        <h1
+          style={{
+            color: '#5fb5d0',
+            fontSize: '28px',
+            margin: '0 0 30px',
+            fontWeight: 700,
+            lineHeight: 1.4,
+          }}
+        >
           アカウント登録
         </h1>
 
         <form onSubmit={handleSubmit} style={{ marginBottom: '30px' }}>
           <div style={{ marginBottom: '20px' }}>
-            <label htmlFor="name" style={{
-              display: 'block',
-              marginBottom: '8px',
-              color: '#456',
-              fontSize: '16px',
-              fontWeight: 500
-            }}>
+            <label
+              htmlFor="name"
+              style={{
+                display: 'block',
+                marginBottom: '8px',
+                color: '#456',
+                fontSize: '16px',
+                fontWeight: 500,
+              }}
+            >
               お名前
             </label>
             <input
@@ -125,19 +135,22 @@ const RegisterPage: React.FC = () => {
                 borderRadius: '8px',
                 boxSizing: 'border-box',
                 transition: 'border-color 0.3s ease',
-                backgroundColor: '#fff'
+                backgroundColor: '#fff',
               }}
             />
           </div>
 
           <div style={{ marginBottom: '20px' }}>
-            <label htmlFor="password" style={{
-              display: 'block',
-              marginBottom: '8px',
-              color: '#456',
-              fontSize: '16px',
-              fontWeight: 500
-            }}>
+            <label
+              htmlFor="password"
+              style={{
+                display: 'block',
+                marginBottom: '8px',
+                color: '#456',
+                fontSize: '16px',
+                fontWeight: 500,
+              }}
+            >
               パスワード
             </label>
             <input
@@ -155,19 +168,22 @@ const RegisterPage: React.FC = () => {
                 borderRadius: '8px',
                 boxSizing: 'border-box',
                 transition: 'border-color 0.3s ease',
-                backgroundColor: '#fff'
+                backgroundColor: '#fff',
               }}
             />
           </div>
 
           <div style={{ marginBottom: '20px' }}>
-            <label htmlFor="password_confirmation" style={{
-              display: 'block',
-              marginBottom: '8px',
-              color: '#456',
-              fontSize: '16px',
-              fontWeight: 500
-            }}>
+            <label
+              htmlFor="password_confirmation"
+              style={{
+                display: 'block',
+                marginBottom: '8px',
+                color: '#456',
+                fontSize: '16px',
+                fontWeight: 500,
+              }}
+            >
               パスワード（確認）
             </label>
             <input
@@ -185,20 +201,22 @@ const RegisterPage: React.FC = () => {
                 borderRadius: '8px',
                 boxSizing: 'border-box',
                 transition: 'border-color 0.3s ease',
-                backgroundColor: '#fff'
+                backgroundColor: '#fff',
               }}
             />
           </div>
 
           {error && (
-            <div style={{
-              color: '#e74c3c',
-              backgroundColor: '#fdf3f2',
-              padding: '15px',
-              borderRadius: '8px',
-              marginBottom: '20px',
-              fontSize: '14px'
-            }}>
+            <div
+              style={{
+                color: '#e74c3c',
+                backgroundColor: '#fdf3f2',
+                padding: '15px',
+                borderRadius: '8px',
+                marginBottom: '20px',
+                fontSize: '14px',
+              }}
+            >
               {error}
             </div>
           )}
@@ -219,18 +237,20 @@ const RegisterPage: React.FC = () => {
               width: '100%',
               maxWidth: '200px',
               boxShadow: '0 5px 15px rgba(106, 193, 208, 0.2)',
-              opacity: isLoading ? 0.7 : 1
+              opacity: isLoading ? 0.7 : 1,
             }}
             onMouseOver={(e) => {
               if (!isLoading) {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 8px 20px rgba(106, 193, 208, 0.3)';
+                e.currentTarget.style.transform = 'translateY(-2px)'
+                e.currentTarget.style.boxShadow =
+                  '0 8px 20px rgba(106, 193, 208, 0.3)'
               }
             }}
             onMouseOut={(e) => {
               if (!isLoading) {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 5px 15px rgba(106, 193, 208, 0.2)';
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow =
+                  '0 5px 15px rgba(106, 193, 208, 0.2)'
               }
             }}
           >
@@ -239,7 +259,7 @@ const RegisterPage: React.FC = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default RegisterPage; 
+export default RegisterPage

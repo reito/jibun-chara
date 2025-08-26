@@ -1,3 +1,3 @@
 export interface BaseProps {
-  basePath: string;
-} 
+  basePath: string
+}
