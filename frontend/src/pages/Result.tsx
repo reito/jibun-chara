@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams, Link, useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
 import { BaseProps } from '../types'
 
 // 画像のインポート
@@ -94,7 +93,7 @@ const characterImages: CharacterImages = {
   },
 }
 
-const Result: React.FC<BaseProps> = ({ basePath }) => {
+const Result: React.FC<BaseProps> = ({ basePath: _basePath }) => {
   const [searchParams] = useSearchParams()
   const [displayType, setDisplayType] = useState<string>('')
   const [scores, setScores] = useState<{ [key: string]: number }>({})
@@ -108,7 +107,6 @@ const Result: React.FC<BaseProps> = ({ basePath }) => {
     window.scrollTo(0, 0)
 
     const userGender = searchParams.get('gender') || 'female'
-    const resultType = searchParams.get('result')
 
     // スコアの取得
     const newScores: { [key: string]: number } =
@@ -188,9 +186,11 @@ const Result: React.FC<BaseProps> = ({ basePath }) => {
 
     // キャラクター画像の設定
     if (newDisplayType === 'バランスタイプ') {
-      const balanceImage =
-        characterImages['バランスタイプ'][userGender as 'male' | 'female']
-      setCharacterData(balanceImage)
+      const balanceImages = characterImages['バランスタイプ']
+      if (balanceImages && 'male' in balanceImages && 'female' in balanceImages) {
+        const balanceImage = balanceImages[userGender as 'male' | 'female']
+        setCharacterData(balanceImage)
+      }
     } else {
       const selectedImage = characterImages[newDisplayType]
       if (selectedImage && 'image' in selectedImage) {

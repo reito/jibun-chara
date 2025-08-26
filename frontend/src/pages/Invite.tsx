@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { BaseProps } from '../types'
 import client from '../api/client'
 
-const Invite: React.FC<BaseProps> = ({ basePath }) => {
+const Invite: React.FC<BaseProps> = ({ basePath: _basePath }) => {
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [slug, setSlug] = useState('')

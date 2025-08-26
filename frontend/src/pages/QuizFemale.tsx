@@ -240,7 +240,7 @@ const questions: Question[] = [
   },
 ]
 
-const QuizFemale: React.FC<BaseProps> = ({ basePath }) => {
+const QuizFemale: React.FC<BaseProps> = ({ basePath: _basePath }) => {
   const navigate = useNavigate()
   const { slug } = useParams<{ slug: string }>()
   const [answers, setAnswers] = useState<Record<string, string>>({})

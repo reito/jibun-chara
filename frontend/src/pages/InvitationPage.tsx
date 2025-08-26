@@ -25,7 +25,7 @@ export const InvitationPage: React.FC = () => {
         const errorMessages = err.message.split('\n')
         const formattedErrors: { [key: string]: string } = {}
 
-        errorMessages.forEach((message) => {
+        errorMessages.forEach((message: string) => {
           if (message.includes('スラッグ')) {
             formattedErrors.slug = message
           } else if (message.includes('相談所名')) {
