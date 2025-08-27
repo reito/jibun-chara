@@ -66,57 +66,17 @@ const RegisterPage: React.FC = () => {
   }
 
   return (
-    <div
-      style={{
-        fontFamily: "'Noto Sans JP', sans-serif",
-        backgroundColor: '#f0f7f7',
-        margin: 0,
-        padding: '20px',
-        textAlign: 'center',
-        color: '#333',
-        lineHeight: 1.6,
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: '#fff',
-          padding: '40px 30px',
-          borderRadius: '15px',
-          boxShadow: '0 8px 20px rgba(106, 193, 208, 0.1)',
-          margin: '0 auto',
-          maxWidth: '600px',
-          width: '100%',
-          boxSizing: 'border-box',
-          border: '1px solid rgba(106, 193, 208, 0.1)',
-        }}
-      >
-        <h1
-          style={{
-            color: '#5fb5d0',
-            fontSize: '28px',
-            margin: '0 0 30px',
-            fontWeight: 700,
-            lineHeight: 1.4,
-          }}
-        >
+    <div className="font-['Noto_Sans_JP',sans-serif] bg-[#f0f7f7] m-0 p-5 text-center text-[#333] leading-relaxed min-h-screen flex flex-col justify-center">
+      <div className="bg-white py-10 px-[30px] rounded-[15px] shadow-[0_8px_20px_rgba(106,193,208,0.1)] mx-auto max-w-[600px] w-full box-border border border-[rgba(106,193,208,0.1)]">
+        <h1 className="text-[#5fb5d0] text-[28px] m-0 mb-[30px] font-bold leading-[1.4]">
           アカウント登録
         </h1>
 
-        <form onSubmit={handleSubmit} style={{ marginBottom: '30px' }}>
-          <div style={{ marginBottom: '20px' }}>
+        <form onSubmit={handleSubmit} className="mb-[30px]">
+          <div className="mb-5">
             <label
               htmlFor="name"
-              style={{
-                display: 'block',
-                marginBottom: '8px',
-                color: '#456',
-                fontSize: '16px',
-                fontWeight: 500,
-              }}
+              className="block mb-2 text-[#456] text-base font-medium"
             >
               お名前
             </label>
@@ -127,29 +87,14 @@ const RegisterPage: React.FC = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              style={{
-                width: '100%',
-                padding: '12px 15px',
-                fontSize: '16px',
-                border: '1px solid #ddd',
-                borderRadius: '8px',
-                boxSizing: 'border-box',
-                transition: 'border-color 0.3s ease',
-                backgroundColor: '#fff',
-              }}
+              className="w-full py-3 px-[15px] text-base border border-[#ddd] rounded-lg box-border transition-[border-color] duration-300 ease-[ease] bg-white"
             />
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
+          <div className="mb-5">
             <label
               htmlFor="password"
-              style={{
-                display: 'block',
-                marginBottom: '8px',
-                color: '#456',
-                fontSize: '16px',
-                fontWeight: 500,
-              }}
+              className="block mb-2 text-[#456] text-base font-medium"
             >
               パスワード
             </label>
@@ -160,29 +105,14 @@ const RegisterPage: React.FC = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              style={{
-                width: '100%',
-                padding: '12px 15px',
-                fontSize: '16px',
-                border: '1px solid #ddd',
-                borderRadius: '8px',
-                boxSizing: 'border-box',
-                transition: 'border-color 0.3s ease',
-                backgroundColor: '#fff',
-              }}
+              className="w-full py-3 px-[15px] text-base border border-[#ddd] rounded-lg box-border transition-[border-color] duration-300 ease-[ease] bg-white"
             />
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
+          <div className="mb-5">
             <label
               htmlFor="password_confirmation"
-              style={{
-                display: 'block',
-                marginBottom: '8px',
-                color: '#456',
-                fontSize: '16px',
-                fontWeight: 500,
-              }}
+              className="block mb-2 text-[#456] text-base font-medium"
             >
               パスワード（確認）
             </label>
@@ -193,30 +123,12 @@ const RegisterPage: React.FC = () => {
               value={formData.password_confirmation}
               onChange={handleChange}
               required
-              style={{
-                width: '100%',
-                padding: '12px 15px',
-                fontSize: '16px',
-                border: '1px solid #ddd',
-                borderRadius: '8px',
-                boxSizing: 'border-box',
-                transition: 'border-color 0.3s ease',
-                backgroundColor: '#fff',
-              }}
+              className="w-full py-3 px-[15px] text-base border border-[#ddd] rounded-lg box-border transition-[border-color] duration-300 ease-[ease] bg-white"
             />
           </div>
 
           {error && (
-            <div
-              style={{
-                color: '#e74c3c',
-                backgroundColor: '#fdf3f2',
-                padding: '15px',
-                borderRadius: '8px',
-                marginBottom: '20px',
-                fontSize: '14px',
-              }}
-            >
+            <div className="text-[#e74c3c] bg-[#fdf3f2] p-[15px] rounded-lg mb-5 text-sm">
               {error}
             </div>
           )}
@@ -224,21 +136,8 @@ const RegisterPage: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading}
-            style={{
-              background: 'linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%)',
-              color: '#fff',
-              border: 'none',
-              padding: '14px 25px',
-              fontSize: '15px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              borderRadius: '50px',
-              transition: 'all 0.3s ease',
-              width: '100%',
-              maxWidth: '200px',
-              boxShadow: '0 5px 15px rgba(106, 193, 208, 0.2)',
-              opacity: isLoading ? 0.7 : 1,
-            }}
+            className="bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] text-white border-none py-[14px] px-[25px] text-[15px] font-semibold cursor-pointer rounded-[50px] transition-all duration-300 w-full max-w-[200px] shadow-[0_5px_15px_rgba(106,193,208,0.2)]"
+            style={{ opacity: isLoading ? 0.7 : 1 }}
             onMouseOver={(e) => {
               if (!isLoading) {
                 e.currentTarget.style.transform = 'translateY(-2px)'

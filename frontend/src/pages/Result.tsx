@@ -237,56 +237,13 @@ const Result: React.FC<BaseProps> = ({ basePath: _basePath }) => {
   const userGender = searchParams.get('gender') || 'female'
 
   return (
-    <div
-      style={{
-        fontFamily: "'Noto Sans JP', sans-serif",
-        backgroundColor: '#f0f7f7',
-        margin: 0,
-        padding: '20px',
-        textAlign: 'center',
-        color: '#333',
-        lineHeight: 1.6,
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: '#fff',
-          padding: '40px 30px',
-          borderRadius: '15px',
-          boxShadow: '0 8px 20px rgba(106, 193, 208, 0.1)',
-          margin: '0 auto',
-          maxWidth: '600px',
-          width: '100%',
-          boxSizing: 'border-box',
-          border: '1px solid rgba(106, 193, 208, 0.1)',
-        }}
-      >
-        <h1
-          style={{
-            color: '#5fb5d0',
-            fontSize: '28px',
-            margin: '0 0 30px',
-            fontWeight: 700,
-            lineHeight: 1.4,
-          }}
-        >
+    <div className="font-['Noto_Sans_JP',sans-serif] bg-[#f0f7f7] m-0 p-5 text-center text-[#333] leading-relaxed min-h-screen flex flex-col justify-center">
+      <div className="bg-white py-10 px-[30px] rounded-[15px] shadow-[0_8px_20px_rgba(106,193,208,0.1)] mx-auto max-w-[600px] w-full box-border border border-[rgba(106,193,208,0.1)]">
+        <h1 className="text-[#5fb5d0] text-[28px] m-0 mb-[30px] font-bold leading-[1.4]">
           診断結果
         </h1>
 
-        <div
-          style={{
-            fontSize: '22px',
-            fontWeight: 'bold',
-            marginBottom: '25px',
-            color: '#2c3e50',
-            lineHeight: 1.4,
-            padding: '0 10px',
-          }}
-        >
+        <div className="text-[22px] font-bold mb-[25px] text-[#2c3e50] leading-[1.4] px-[10px]">
           あなたのタイプは「{displayType}」です！
         </div>
 
@@ -295,242 +252,93 @@ const Result: React.FC<BaseProps> = ({ basePath: _basePath }) => {
             <img
               src={characterData.image}
               alt={characterData.name}
-              style={{
-                width: '200px',
-                height: 'auto',
-                margin: '20px auto',
-                display: 'block',
-                borderRadius: '10px',
-                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-              }}
+              className="w-[200px] h-auto my-5 mx-auto block rounded-[10px] shadow-[0_4px_10px_rgba(0,0,0,0.1)]"
             />
-            <div
-              style={{
-                fontSize: '14px',
-                color: '#666',
-                margin: '10px 0',
-                textAlign: 'center',
-              }}
-            >
+            <div className="text-sm text-[#666] my-[10px] text-center">
               {characterData.name}
             </div>
           </div>
         )}
 
-        <div
-          style={{
-            maxWidth: '600px',
-            margin: '30px auto',
-            padding: '20px',
-            background: '#fff',
-            borderRadius: '12px',
-            boxShadow: '0 4px 15px rgba(106, 193, 208, 0.1)',
-          }}
-        >
+        <div className="max-w-[600px] my-[30px] mx-auto p-5 bg-white rounded-xl shadow-[0_4px_15px_rgba(106,193,208,0.1)]">
           {userGender === 'female' ? (
             <>
-              <div style={{ margin: '20px 0' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '8px',
-                    fontWeight: 500,
-                    color: '#2c3e50',
-                  }}
-                >
+              <div className="my-5">
+                <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
                   <span>アイドルタイプ</span>
                   <span>{scores['アイドルタイプ']}%</span>
                 </div>
-                <div
-                  style={{
-                    width: '100%',
-                    height: '24px',
-                    background: '#e9f5f7',
-                    borderRadius: '12px',
-                    overflow: 'hidden',
-                  }}
-                >
+                <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
                   <div
-                    style={{
-                      height: '100%',
-                      width: `${scores['アイドルタイプ']}%`,
-                      background:
-                        'linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%)',
-                      transition: 'width 1s ease',
-                    }}
+                    className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
+                    style={{ width: `${scores['アイドルタイプ']}%` }}
                   />
                 </div>
               </div>
 
-              <div style={{ margin: '20px 0' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '8px',
-                    fontWeight: 500,
-                    color: '#2c3e50',
-                  }}
-                >
+              <div className="my-5">
+                <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
                   <span>バリキャリタイプ</span>
                   <span>{scores['バリキャリタイプ']}%</span>
                 </div>
-                <div
-                  style={{
-                    width: '100%',
-                    height: '24px',
-                    background: '#e9f5f7',
-                    borderRadius: '12px',
-                    overflow: 'hidden',
-                  }}
-                >
+                <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
                   <div
-                    style={{
-                      height: '100%',
-                      width: `${scores['バリキャリタイプ']}%`,
-                      background:
-                        'linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%)',
-                      transition: 'width 1s ease',
-                    }}
+                    className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
+                    style={{ width: `${scores['バリキャリタイプ']}%` }}
                   />
                 </div>
               </div>
 
-              <div style={{ margin: '20px 0' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '8px',
-                    fontWeight: 500,
-                    color: '#2c3e50',
-                  }}
-                >
+              <div className="my-5">
+                <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
                   <span>マザータイプ</span>
                   <span>{scores['マザータイプ']}%</span>
                 </div>
-                <div
-                  style={{
-                    width: '100%',
-                    height: '24px',
-                    background: '#e9f5f7',
-                    borderRadius: '12px',
-                    overflow: 'hidden',
-                  }}
-                >
+                <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
                   <div
-                    style={{
-                      height: '100%',
-                      width: `${scores['マザータイプ']}%`,
-                      background:
-                        'linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%)',
-                      transition: 'width 1s ease',
-                    }}
+                    className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
+                    style={{ width: `${scores['マザータイプ']}%` }}
                   />
                 </div>
               </div>
             </>
           ) : (
             <>
-              <div style={{ margin: '20px 0' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '8px',
-                    fontWeight: 500,
-                    color: '#2c3e50',
-                  }}
-                >
+              <div className="my-5">
+                <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
                   <span>キングタイプ</span>
                   <span>{scores['キングタイプ']}%</span>
                 </div>
-                <div
-                  style={{
-                    width: '100%',
-                    height: '24px',
-                    background: '#e9f5f7',
-                    borderRadius: '12px',
-                    overflow: 'hidden',
-                  }}
-                >
+                <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
                   <div
-                    style={{
-                      height: '100%',
-                      width: `${scores['キングタイプ']}%`,
-                      background:
-                        'linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%)',
-                      transition: 'width 1s ease',
-                    }}
+                    className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
+                    style={{ width: `${scores['キングタイプ']}%` }}
                   />
                 </div>
               </div>
 
-              <div style={{ margin: '20px 0' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '8px',
-                    fontWeight: 500,
-                    color: '#2c3e50',
-                  }}
-                >
+              <div className="my-5">
+                <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
                   <span>ナイトタイプ</span>
                   <span>{scores['ナイトタイプ']}%</span>
                 </div>
-                <div
-                  style={{
-                    width: '100%',
-                    height: '24px',
-                    background: '#e9f5f7',
-                    borderRadius: '12px',
-                    overflow: 'hidden',
-                  }}
-                >
+                <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
                   <div
-                    style={{
-                      height: '100%',
-                      width: `${scores['ナイトタイプ']}%`,
-                      background:
-                        'linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%)',
-                      transition: 'width 1s ease',
-                    }}
+                    className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
+                    style={{ width: `${scores['ナイトタイプ']}%` }}
                   />
                 </div>
               </div>
 
-              <div style={{ margin: '20px 0' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '8px',
-                    fontWeight: 500,
-                    color: '#2c3e50',
-                  }}
-                >
+              <div className="my-5">
+                <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
                   <span>プリンスタイプ</span>
                   <span>{scores['プリンスタイプ']}%</span>
                 </div>
-                <div
-                  style={{
-                    width: '100%',
-                    height: '24px',
-                    background: '#e9f5f7',
-                    borderRadius: '12px',
-                    overflow: 'hidden',
-                  }}
-                >
+                <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
                   <div
-                    style={{
-                      height: '100%',
-                      width: `${scores['プリンスタイプ']}%`,
-                      background:
-                        'linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%)',
-                      transition: 'width 1s ease',
-                    }}
+                    className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
+                    style={{ width: `${scores['プリンスタイプ']}%` }}
                   />
                 </div>
               </div>
@@ -538,241 +346,72 @@ const Result: React.FC<BaseProps> = ({ basePath: _basePath }) => {
           )}
         </div>
 
-        <div
-          style={{
-            fontSize: '16px',
-            marginBottom: '30px',
-            color: '#456',
-            lineHeight: 1.8,
-            textAlign: 'left',
-            padding: '0 15px',
-          }}
-        >
+        <div className="text-base mb-[30px] text-[#456] leading-[1.8] text-left px-[15px]">
           {descriptions[displayType]}
         </div>
 
-        <div
-          style={{
-            textAlign: 'center',
-            margin: '35px 0',
-            padding: '0 15px',
-          }}
-        >
-          <p
-            style={{
-              color: '#FF69B4',
-              fontSize: '19px',
-              fontWeight: 500,
-              marginBottom: '25px',
-              lineHeight: 1.6,
-            }}
-          >
+        <div className="text-center my-[35px] px-[15px]">
+          <p className="text-[#FF69B4] text-[19px] font-medium mb-[25px] leading-relaxed">
             あなたの恋愛・婚活の可能性を広げるために...
             <br />
             気になる方をチェック！ ✨
           </p>
 
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '20px',
-              alignItems: 'center',
-            }}
-          >
-            <div
-              style={{
-                width: '100%',
-                maxWidth: '320px',
-              }}
-            >
+          <div className="flex flex-col gap-5 items-center">
+            <div className="w-full max-w-[320px]">
               <a
                 href="https://lin.ee/qSZORFf"
-                style={{
-                  background:
-                    'linear-gradient(135deg, #FF88B3 0%, #FF69B4 100%)',
-                  color: '#fff',
-                  border: 'none',
-                  padding: '16px 20px',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  borderRadius: '50px',
-                  transition: 'all 0.3s ease',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  textDecoration: 'none',
-                  width: '100%',
-                  boxSizing: 'border-box',
-                  boxShadow: '0 5px 15px rgba(255, 136, 179, 0.2)',
-                  textAlign: 'center',
-                  letterSpacing: '0.5px',
-                  lineHeight: 1.4,
-                  whiteSpace: 'nowrap',
-                  minHeight: '50px',
-                }}
+                className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
               >
                 運命のパートナーが見つけやすくなる
                 <br />
                 トータルコーディネート
               </a>
-              <p
-                style={{
-                  fontSize: '14px',
-                  color: '#666',
-                  fontWeight: 'normal',
-                  lineHeight: 1.6,
-                  margin: '8px 0 0 0',
-                  textAlign: 'left',
-                }}
-              >
+              <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
                 外見＆内面！あなたが引き寄せたい理想の相手と出会うポイントを詳しく解説！
               </p>
             </div>
 
-            <div
-              style={{
-                width: '100%',
-                maxWidth: '320px',
-              }}
-            >
+            <div className="w-full max-w-[320px]">
               <a
                 href="https://trial-marriage-hunting.vercel.app/"
-                style={{
-                  background:
-                    'linear-gradient(135deg, #FF88B3 0%, #FF69B4 100%)',
-                  color: '#fff',
-                  border: 'none',
-                  padding: '16px 20px',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  borderRadius: '50px',
-                  transition: 'all 0.3s ease',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  textDecoration: 'none',
-                  width: '100%',
-                  boxSizing: 'border-box',
-                  boxShadow: '0 5px 15px rgba(255, 136, 179, 0.2)',
-                  textAlign: 'center',
-                  letterSpacing: '0.5px',
-                  lineHeight: 1.4,
-                  whiteSpace: 'nowrap',
-                  minHeight: '50px',
-                }}
+                className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
               >
                 婚活に興味はあるけど不安な方へ
                 <br />
                 おためし婚活カウンセリング
               </a>
-              <p
-                style={{
-                  fontSize: '14px',
-                  color: '#666',
-                  fontWeight: 'normal',
-                  lineHeight: 1.6,
-                  margin: '8px 0 0 0',
-                  textAlign: 'left',
-                }}
-              >
+              <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
                 理想の出会いに向けて、あなたに合った婚活方法を提案しながらおためし婚活ができます！
               </p>
             </div>
 
-            <div
-              style={{
-                width: '100%',
-                maxWidth: '320px',
-              }}
-            >
+            <div className="w-full max-w-[320px]">
               <a
                 href="https://square.link/u/vQEat01w"
-                style={{
-                  background:
-                    'linear-gradient(135deg, #FF88B3 0%, #FF69B4 100%)',
-                  color: '#fff',
-                  border: 'none',
-                  padding: '16px 20px',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  borderRadius: '50px',
-                  transition: 'all 0.3s ease',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  textDecoration: 'none',
-                  width: '100%',
-                  boxSizing: 'border-box',
-                  boxShadow: '0 5px 15px rgba(255, 136, 179, 0.2)',
-                  textAlign: 'center',
-                  letterSpacing: '0.5px',
-                  lineHeight: 1.4,
-                  whiteSpace: 'nowrap',
-                  minHeight: '50px',
-                }}
+                className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
               >
                 自分の取り扱い説明書を手に入れて
                 <br />
                 パートナー探しに活かす
               </a>
-              <p
-                style={{
-                  fontSize: '14px',
-                  color: '#666',
-                  fontWeight: 'normal',
-                  lineHeight: 1.6,
-                  margin: '8px 0 0 0',
-                  textAlign: 'left',
-                }}
-              >
+              <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
                 あなたのキャラタイプを婚活に活かすヒントをもっと深く知りたくありませんか？
               </p>
             </div>
           </div>
         </div>
 
-        <div
-          style={{
-            textAlign: 'center',
-            marginTop: '30px',
-          }}
-        >
+        <div className="text-center mt-[30px]">
           <Link
             to={`/${slug}`}
-            style={{
-              background: 'linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%)',
-              color: '#fff',
-              border: 'none',
-              padding: '14px 25px',
-              fontSize: '15px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              borderRadius: '50px',
-              transition: 'all 0.3s ease',
-              display: 'inline-block',
-              textDecoration: 'none',
-              maxWidth: '200px',
-              boxShadow: '0 5px 15px rgba(106, 193, 208, 0.2)',
-              textAlign: 'center',
-              letterSpacing: '0.5px',
-              lineHeight: 1.5,
-            }}
+            className="bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] text-white border-none py-[14px] px-[25px] text-[15px] font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] inline-block no-underline max-w-[200px] shadow-[0_5px_15px_rgba(106,193,208,0.2)] text-center tracking-[0.5px] leading-[1.5]"
           >
             診断トップに戻る
           </Link>
         </div>
 
-        <div
-          style={{
-            marginTop: '50px',
-            color: '#666',
-            fontSize: '12px',
-          }}
-        >
+        <div className="mt-[50px] text-[#666] text-xs">
           © 2025 BLANCA. All rights reserved.
         </div>
       </div>

@@ -323,171 +323,55 @@ const QuizFemale: React.FC<BaseProps> = ({ basePath: _basePath }) => {
   }
 
   return (
-    <div
-      style={{
-        fontFamily: "'Noto Sans JP', sans-serif",
-        backgroundColor: '#f0f7f7',
-        color: '#333',
-        margin: 0,
-        padding: 0,
-        lineHeight: 1.6,
-      }}
-    >
-      <header
-        style={{
-          background: 'linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%)',
-          padding: '20px',
-          textAlign: 'center',
-          color: '#fff',
-          position: 'relative',
-          boxShadow: '0 4px 15px rgba(106, 193, 208, 0.2)',
-        }}
-      >
+    <div className="font-['Noto_Sans_JP',sans-serif] bg-[#f0f7f7] text-[#333] m-0 p-0 leading-relaxed">
+      <header className="bg-[linear-gradient(135deg,#6ac1d0_0%,#5fb5d0_100%)] p-5 text-center text-white relative shadow-[0_4px_15px_rgba(106,193,208,0.2)]">
         <h1
-          style={{
-            margin: 0,
-            fontSize: '24px',
-            fontWeight: 700,
-            letterSpacing: '1px',
-            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)',
-          }}
+          className="m-0 text-[24px] font-bold tracking-[1px]"
+          style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)' }}
         >
           じぶんキャラ診断
         </h1>
       </header>
 
-      <nav
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-          backgroundColor: '#fff',
-          padding: '10px 5px',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
-        }}
-      >
+      <nav className="flex justify-center flex-wrap bg-white py-[10px] px-[5px] shadow-[0_4px_6px_rgba(0,0,0,0.05)]">
         <a
           href="https://blanca715.com/"
-          style={{
-            margin: '5px 10px',
-            padding: '5px 10px',
-            textDecoration: 'none',
-            color: '#5fb5d0',
-            fontWeight: 500,
-            fontSize: '14px',
-            position: 'relative',
-            transition: 'all 0.3s ease',
-            whiteSpace: 'nowrap',
-          }}
+          className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap"
         >
           相談所トップ
         </a>
         <a
           href="https://blanca715.com/category/%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88/"
-          style={{
-            margin: '5px 10px',
-            padding: '5px 10px',
-            textDecoration: 'none',
-            color: '#5fb5d0',
-            fontWeight: 500,
-            fontSize: '14px',
-            position: 'relative',
-            transition: 'all 0.3s ease',
-            whiteSpace: 'nowrap',
-          }}
+          className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap"
         >
           イベント情報
         </a>
         <a
           href="https://blanca715.com/contact/"
-          style={{
-            margin: '5px 10px',
-            padding: '5px 10px',
-            textDecoration: 'none',
-            color: '#5fb5d0',
-            fontWeight: 500,
-            fontSize: '14px',
-            position: 'relative',
-            transition: 'all 0.3s ease',
-            whiteSpace: 'nowrap',
-          }}
+          className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap"
         >
           無料相談予約
         </a>
         <a
           href="https://blanca715.com/achievement/"
-          style={{
-            margin: '5px 10px',
-            padding: '5px 10px',
-            textDecoration: 'none',
-            color: '#5fb5d0',
-            fontWeight: 500,
-            fontSize: '14px',
-            position: 'relative',
-            transition: 'all 0.3s ease',
-            whiteSpace: 'nowrap',
-          }}
+          className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap"
         >
           成婚事例
         </a>
       </nav>
 
-      <main
-        style={{
-          padding: '20px 15px',
-          maxWidth: '800px',
-          margin: '0 auto',
-        }}
-      >
-        <div
-          style={{
-            backgroundColor: '#fff',
-            borderRadius: '12px',
-            padding: '15px',
-            marginBottom: '20px',
-            boxShadow: '0 8px 20px rgba(106, 193, 208, 0.1)',
-            border: '1px solid rgba(106, 193, 208, 0.1)',
-            textAlign: 'center',
-          }}
-        >
-          <p
-            style={{
-              textAlign: 'center',
-              margin: 0,
-              color: '#5fb5d0',
-              fontSize: '16px',
-              fontWeight: 500,
-              letterSpacing: '1px',
-            }}
-          >
+      <main className="py-5 px-[15px] max-w-[800px] mx-auto">
+        <div className="bg-white rounded-xl p-[15px] mb-5 shadow-[0_8px_20px_rgba(106,193,208,0.1)] border border-[rgba(106,193,208,0.1)] text-center">
+          <p className="text-center m-0 text-[#5fb5d0] text-base font-medium tracking-[1px]">
             あなたの性格タイプを診断します
           </p>
-          <div
-            style={{
-              width: '100%',
-              height: '6px',
-              backgroundColor: '#e9f5f7',
-              borderRadius: '3px',
-              marginTop: '12px',
-              overflow: 'hidden',
-            }}
-          >
+          <div className="w-full h-[6px] bg-[#e9f5f7] rounded-[3px] mt-3 overflow-hidden">
             <div
-              style={{
-                height: '100%',
-                background: 'linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%)',
-                width: `${progress}%`,
-                transition: 'width 0.3s ease',
-              }}
+              className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-300 ease-[ease]"
+              style={{ width: `${progress}%` }}
             />
           </div>
-          <p
-            style={{
-              marginTop: '8px',
-              fontSize: '13px',
-              color: '#666',
-            }}
-          >
+          <p className="mt-2 text-[13px] text-[#666]">
             回答済み: {Object.keys(answers).length} / {questions.length} 問
           </p>
         </div>
@@ -496,42 +380,15 @@ const QuizFemale: React.FC<BaseProps> = ({ basePath: _basePath }) => {
           {shuffledQuestions.map((question, index) => (
             <div
               key={question.id}
-              style={{
-                marginBottom: '20px',
-                backgroundColor: '#fff',
-                padding: '20px',
-                borderRadius: '12px',
-                boxShadow: '0 8px 20px rgba(106, 193, 208, 0.1)',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                border: '1px solid rgba(106, 193, 208, 0.1)',
-              }}
+              className="mb-5 bg-white p-5 rounded-xl shadow-[0_8px_20px_rgba(106,193,208,0.1)] transition-[transform,box-shadow] duration-300 ease-[ease] border border-[rgba(106,193,208,0.1)]"
             >
-              <p
-                style={{
-                  fontSize: '16px',
-                  marginBottom: '15px',
-                  color: '#2c3e50',
-                  fontWeight: 500,
-                  paddingBottom: '10px',
-                  borderBottom: '1px solid rgba(106, 193, 208, 0.1)',
-                  lineHeight: 1.6,
-                }}
-              >
+              <p className="text-base mb-[15px] text-[#2c3e50] font-medium pb-[10px] border-b border-[rgba(106,193,208,0.1)] leading-[1.6]">
                 {index + 1}. {question.text}
               </p>
               {['yes', 'neutral', 'no'].map((value) => (
                 <label
                   key={value}
-                  style={{
-                    display: 'block',
-                    margin: '12px 0',
-                    cursor: 'pointer',
-                    padding: '12px 15px',
-                    borderRadius: '8px',
-                    transition: 'background-color 0.3s ease',
-                    color: '#456',
-                    fontSize: '15px',
-                  }}
+                  className="block my-3 cursor-pointer py-3 px-[15px] rounded-lg transition-colors duration-300 ease-[ease] text-[#456] text-[15px]"
                 >
                   <input
                     type="radio"
@@ -539,42 +396,8 @@ const QuizFemale: React.FC<BaseProps> = ({ basePath: _basePath }) => {
                     value={value}
                     checked={answers[`q${question.id}`] === value}
                     onChange={() => handleAnswerChange(question.id, value)}
-                    style={{
-                      marginRight: '12px',
-                      accentColor: '#5fb5d0',
-                      backgroundColor: '#fff',
-                      WebkitAppearance: 'none',
-                      MozAppearance: 'none',
-                      appearance: 'none',
-                      width: '16px',
-                      height: '16px',
-                      border: '2px solid #5fb5d0',
-                      borderRadius: '50%',
-                      outline: 'none',
-                      cursor: 'pointer',
-                      position: 'relative',
-                      boxSizing: 'border-box',
-                    }}
+                    className="mr-3 w-4 h-4 border-2 border-[#5fb5d0] rounded-full appearance-none bg-white outline-none cursor-pointer relative box-border checked:bg-white checked:after:content-[''] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-2 checked:after:h-2 checked:after:bg-[#5fb5d0] checked:after:rounded-full"
                   />
-                  <style>
-                    {`
-                      input[type="radio"]:checked {
-                        background-color: #fff;
-                        position: relative;
-                      }
-                      input[type="radio"]:checked::after {
-                        content: '';
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        width: 8px;
-                        height: 8px;
-                        background-color: #5fb5d0;
-                        border-radius: 50%;
-                      }
-                    `}
-                  </style>
                   {value === 'yes'
                     ? 'そう思う'
                     : value === 'neutral'
@@ -586,24 +409,7 @@ const QuizFemale: React.FC<BaseProps> = ({ basePath: _basePath }) => {
           ))}
           <button
             type="submit"
-            style={{
-              background: 'linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%)',
-              border: 'none',
-              padding: '16px 30px',
-              color: '#fff',
-              fontSize: '16px',
-              fontWeight: 500,
-              cursor: 'pointer',
-              borderRadius: '30px',
-              transition: 'all 0.3s ease',
-              display: 'block',
-              margin: '30px auto',
-              width: 'auto',
-              minWidth: '200px',
-              letterSpacing: '1px',
-              boxShadow: '0 5px 15px rgba(106, 193, 208, 0.3)',
-              textAlign: 'center',
-            }}
+            className="bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] border-none py-4 px-[30px] text-white text-base font-medium cursor-pointer rounded-[30px] transition-all duration-300 ease-[ease] block my-[30px] mx-auto w-auto min-w-[200px] tracking-[1px] shadow-[0_5px_15px_rgba(106,193,208,0.3)] text-center"
           >
             診断結果を見る
           </button>
