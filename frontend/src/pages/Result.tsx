@@ -187,7 +187,11 @@ const Result: React.FC<BaseProps> = ({ basePath: _basePath }) => {
     // キャラクター画像の設定
     if (newDisplayType === 'バランスタイプ') {
       const balanceImages = characterImages['バランスタイプ']
-      if (balanceImages && 'male' in balanceImages && 'female' in balanceImages) {
+      if (
+        balanceImages &&
+        'male' in balanceImages &&
+        'female' in balanceImages
+      ) {
         const balanceImage = balanceImages[userGender as 'male' | 'female']
         setCharacterData(balanceImage)
       }
