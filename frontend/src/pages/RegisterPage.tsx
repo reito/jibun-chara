@@ -136,7 +136,8 @@ const RegisterPage: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] text-white border-none py-[14px] px-[25px] text-[15px] font-semibold cursor-pointer rounded-[50px] transition-all duration-300 w-full max-w-[200px] shadow-[0_5px_15px_rgba(106,193,208,0.2)]" style={{ opacity: isLoading ? 0.7 : 1 }}
+            className="bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] text-white border-none py-[14px] px-[25px] text-[15px] font-semibold cursor-pointer rounded-[50px] transition-all duration-300 w-full max-w-[200px] shadow-[0_5px_15px_rgba(106,193,208,0.2)]"
+            style={{ opacity: isLoading ? 0.7 : 1 }}
             onMouseOver={(e) => {
               if (!isLoading) {
                 e.currentTarget.style.transform = 'translateY(-2px)'

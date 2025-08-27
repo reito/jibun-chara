@@ -138,9 +138,7 @@ const Invite: React.FC<BaseProps> = ({ basePath: _basePath }) => {
 
         {inviteUrl && (
           <div className="bg-[#f8f9fa] p-5 rounded-lg mt-5">
-            <p className="m-0 mb-[10px] text-[#456] text-sm">
-              招待リンク:
-            </p>
+            <p className="m-0 mb-[10px] text-[#456] text-sm">招待リンク:</p>
             <div className="bg-white p-3 rounded-md border border-[#ddd] break-all text-sm text-[#333]">
               {inviteUrl}
             </div>

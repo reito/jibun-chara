@@ -75,9 +75,7 @@ const TopPage: React.FC = () => {
   return (
     <div className="top-page-container">
       <div className="top-page-card">
-        <h1 className="top-page-title">
-          あなたの恋愛タイプ診断
-        </h1>
+        <h1 className="top-page-title">あなたの恋愛タイプ診断</h1>
 
         <p className="top-page-description">
           あなたの恋愛タイプを診断して、
@@ -101,9 +99,7 @@ const TopPage: React.FC = () => {
         </div>
 
         <div className="features-section">
-          <h2 className="features-title">
-            診断テストの特徴
-          </h2>
+          <h2 className="features-title">診断テストの特徴</h2>
           <ul className="features-list">
             <li className="feature-item">
               <span className="feature-check">✓</span>

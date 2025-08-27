@@ -325,7 +325,7 @@ const QuizMale: React.FC<BaseProps> = ({ basePath: _basePath }) => {
   return (
     <div className="font-['Noto_Sans_JP',sans-serif] bg-[#f0f7f7] text-[#333] m-0 p-0 leading-relaxed">
       <header className="bg-[linear-gradient(135deg,#6ac1d0_0%,#5fb5d0_100%)] p-5 text-center text-white relative shadow-[0_4px_15px_rgba(106,193,208,0.2)]">
-        <h1 
+        <h1
           className="m-0 text-[24px] font-bold tracking-[1px]"
           style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)' }}
         >
