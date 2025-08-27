@@ -1,42 +1,127 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* TopPage styles */
+.top-page-container {
+  font-family: 'Noto Sans JP', sans-serif;
+  background-color: #f0f7f7;
+  margin: 0;
+  padding: 20px;
   text-align: center;
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.top-page-card {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(106, 193, 208, 0.1);
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(106, 193, 208, 0.1);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.top-page-title {
+  color: #5fb5d0;
+  font-size: 28px;
+  margin: 0 0 30px;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
-.card {
-  padding: 2em;
+.top-page-description {
+  font-size: 16px;
+  margin-bottom: 30px;
+  color: #456;
+  line-height: 1.8;
 }
 
-.read-the-docs {
-  color: #888;
+.button-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.gender-button {
+  padding: 20px 40px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 200px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+
+.gender-button-female {
+  border: 2px solid #ff85a2;
+  color: #ff85a2;
+}
+
+.gender-button-female:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 133, 162, 0.2);
+  background: #fff5f7;
+}
+
+.gender-button-male {
+  border: 2px solid #4a90e2;
+  color: #4a90e2;
+}
+
+.gender-button-male:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
+  background: #f5f8fc;
+}
+
+.features-section {
+  margin-top: 40px;
+  padding: 20px;
+  background: rgba(106, 193, 208, 0.05);
+  border-radius: 10px;
+}
+
+.features-title {
+  color: #5fb5d0;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.feature-item {
+  margin-bottom: 10px;
+  padding-left: 25px;
+  position: relative;
+  color: #456;
+}
+
+.feature-check {
+  position: absolute;
+  left: 0;
+  color: #5fb5d0;
+}
+
+/* Loading state */
+.loading-container {
+  font-family: 'Noto Sans JP', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5fb5d0;
+  font-size: 18px;
 }
