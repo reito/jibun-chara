@@ -1,6 +1,6 @@
-# ブランチ保護ルール設定手順
+# ブランチ保護ルール設定手順（詳細版）
 
-このドキュメントでは、GitHub のブランチ保護ルールを設定する手順を説明します。
+このドキュメントでは、GitHub のブランチ保護ルールを詳細に設定する手順を説明します。
 
 ## 設定手順
 
@@ -13,31 +13,64 @@
 1. 「Add rule」ボタンをクリック
 2. 「Branch name pattern」に `main` と入力
 
-### 3. 推奨設定項目
+### 3. 詳細設定項目
 
-#### ✅ 有効にする項目
-- **Require status checks to pass before merging**
-  - CIチェックが通らないとマージできない
-  - 「Require branches to be up to date before merging」もチェック
-  - Status checks に以下を追加：
-    - `Frontend Tests`
-    - `Backend Tests`
+#### ✅ **必須設定項目**
 
-- **Require conversation resolution before merging**
-  - PR上のコメント・会話をすべて解決後にマージ可能
+**Protect matching branches:**
 
-- **Include administrators**
-  - 管理者（リポジトリオーナー）もルールの対象にする
+1. **Require status checks to pass before merging** ✅
+   - CIチェックが通らないとマージできない
+   - **Require branches to be up to date before merging** ✅
+   - **Status checks that are required:**
+     - `Frontend TypeCheck`
+     - `Frontend ESLint`
+     - `Frontend Prettier`
+     - `Backend RuboCop`
+     - `Backend RSpec`
+   
+2. **Require conversation resolution before merging** ✅
+   - PR上のコメント・会話をすべて解決後にマージ可能
 
-#### ❌ 無効にする項目（一人開発のため）
-- **Require pull request reviews**
-  - レビュー必須だと一人では永遠にマージできない
+3. **Include administrators** ✅
+   - リポジトリオーナーもルールの対象にする
 
-- **Require deployments to succeed**
-  - デプロイが不要な場合
+#### ❌ **無効にする項目（一人開発のため）**
 
-### 4. 設定を保存
+1. **Require pull request reviews** ❌
+   - 一人開発では永遠にマージできなくなる
+   
+2. **Require deployments to succeed** ❌
+   - デプロイ設定していない場合
+
+3. **Require signed commits** ❌
+   - コミット署名は任意（設定が複雑）
+
+#### ⚠️ **オプション項目（お好みで）**
+
+1. **Restrict pushes that create files** 
+   - 特定のパスへのファイル作成を制限
+
+2. **Restrict push and merge** 
+   - プッシュ・マージできるユーザーを制限
+
+### 4. 設定の保存
 「Create」ボタンをクリックして設定を保存
+
+## 注意：Status checksの追加方法
+
+Status checksは最初のCIが実行されないと選択肢に表示されません：
+
+1. まず、PR作成してCIを一度実行
+2. その後、Settingsに戻ってStatus checksを追加
+3. または、手動で以下をテキスト入力：
+   ```
+   Frontend TypeCheck
+   Frontend ESLint  
+   Frontend Prettier
+   Backend RuboCop
+   Backend RSpec
+   ```
 
 ## 設定後の開発フロー
 
