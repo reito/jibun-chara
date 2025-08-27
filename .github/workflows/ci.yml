@@ -1,0 +1,115 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  # Frontend Jobs
+  frontend-typecheck:
+    name: Frontend TypeCheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: yarn install --frozen-lockfile
+      - name: Run TypeScript type check
+        working-directory: ./frontend
+        run: yarn typecheck
+
+  frontend-lint:
+    name: Frontend ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: yarn install --frozen-lockfile
+      - name: Run ESLint
+        working-directory: ./frontend
+        run: yarn lint
+
+  frontend-prettier:
+    name: Frontend Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: yarn install --frozen-lockfile
+      - name: Run Prettier check
+        working-directory: ./frontend
+        run: yarn prettier
+
+  # Backend Jobs
+  backend-rubocop:
+    name: Backend RuboCop
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4.1'
+          bundler-cache: true
+          working-directory: ./backend
+      - name: Run RuboCop
+        working-directory: ./backend
+        run: bundle exec rubocop
+
+  backend-rspec:
+    name: Backend RSpec
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: jibun_chara_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: postgres://postgres:password@localhost:5432/jibun_chara_test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4.1'
+          bundler-cache: true
+          working-directory: ./backend
+      - name: Setup database
+        working-directory: ./backend
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
+      - name: Run RSpec
+        working-directory: ./backend
+        run: bundle exec rspec
