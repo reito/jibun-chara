@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { BaseProps } from '../types'
 
 interface Question {
   id: number
@@ -240,7 +239,7 @@ const questions: Question[] = [
   },
 ]
 
-const QuizMale: React.FC<BaseProps> = ({ basePath: _basePath }) => {
+const QuizMale: React.FC = () => {
   const navigate = useNavigate()
   const { slug } = useParams<{ slug: string }>()
   const [answers, setAnswers] = useState<Record<string, string>>({})
