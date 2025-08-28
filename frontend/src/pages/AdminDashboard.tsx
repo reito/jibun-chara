@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 interface MenuItem {
   id: string
@@ -49,7 +49,6 @@ const menuItems: MenuItem[] = [
 
 const AdminDashboard: React.FC = () => {
   const { slug } = useParams<{ slug: string }>()
-  const navigate = useNavigate()
   const [selectedMenu, setSelectedMenu] = useState('overview')
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
@@ -119,7 +118,9 @@ const AdminDashboard: React.FC = () => {
                 <>
                   <span className="text-3xl">{currentItem.icon}</span>
                   <div>
-                    <h3 className="text-xl font-semibold">{currentItem.label}</h3>
+                    <h3 className="text-xl font-semibold">
+                      {currentItem.label}
+                    </h3>
                     <p className="text-sm text-gray-500">
                       {currentItem.description}
                     </p>
@@ -183,9 +184,7 @@ const AdminDashboard: React.FC = () => {
                         <span className="text-xl">{item.icon}</span>
                         <span className="font-medium">{item.label}</span>
                       </div>
-                      {isSelected && (
-                        <span className="text-sm">▶</span>
-                      )}
+                      {isSelected && <span className="text-sm">▶</span>}
                     </button>
                   </li>
                 )
