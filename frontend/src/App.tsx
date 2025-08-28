@@ -129,13 +129,10 @@ const App: React.FC = () => {
         <Route path="/404" element={<NotFound />} />
         <Route path="/:slug" element={<SlugValidator />}>
           <Route index element={<TopPage />} />
-          <Route path="dashboard" element={<Admin basePath="/:slug" />} />
-          <Route
-            path="quiz-female"
-            element={<QuizFemale basePath="/:slug" />}
-          />
-          <Route path="quiz-male" element={<QuizMale basePath="/:slug" />} />
-          <Route path="result" element={<Result basePath="/:slug" />} />
+          <Route path="dashboard" element={<Admin />} />
+          <Route path="quiz-female" element={<QuizFemale />} />
+          <Route path="quiz-male" element={<QuizMale />} />
+          <Route path="result" element={<Result />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

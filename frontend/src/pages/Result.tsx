@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams, Link, useParams } from 'react-router-dom'
-import { BaseProps } from '../types'
 
 // 画像のインポート
 import kingImage from '../assets/img/character-king.png'
@@ -93,7 +92,7 @@ const characterImages: CharacterImages = {
   },
 }
 
-const Result: React.FC<BaseProps> = ({ basePath: _basePath }) => {
+const Result: React.FC = () => {
   const [searchParams] = useSearchParams()
   const [displayType, setDisplayType] = useState<string>('')
   const [scores, setScores] = useState<{ [key: string]: number }>({})
