@@ -46,11 +46,11 @@ RSpec.describe "Api::V1::CtaButtons", type: :request do
         json_response = JSON.parse(response.body)
         expect(json_response['status']).to eq('success')
         expect(json_response['data'].length).to eq(2)
-        
+
         buttons = json_response['data']
         visible_button = buttons.find { |b| b['title'] == 'Visible Button' }
         hidden_button = buttons.find { |b| b['title'] == 'Hidden Button' }
-        
+
         expect(visible_button['visible']).to be true
         expect(hidden_button['visible']).to be false
       end
@@ -78,7 +78,7 @@ RSpec.describe "Api::V1::CtaButtons", type: :request do
 
       it 'creates new cta buttons with correct visible settings and destroys existing ones' do
         existing_button = create(:cta_button, tenant: tenant, title: 'Old Button', position: 1)
-        
+
         expect {
           post '/api/v1/cta_buttons/bulk_update', params: bulk_params, headers: headers
         }.to change(CtaButton, :count).by(2) # 1個削除、3個作成で+2
@@ -89,7 +89,7 @@ RSpec.describe "Api::V1::CtaButtons", type: :request do
         expect(json_response['data'].length).to eq(3)
 
         expect(CtaButton.exists?(existing_button.id)).to be false
-        
+
         buttons = tenant.cta_buttons.reload.ordered
         expect(buttons[0].visible).to be true
         expect(buttons[1].visible).to be false
@@ -110,7 +110,7 @@ RSpec.describe "Api::V1::CtaButtons", type: :request do
       xit 'saves visible: false items even when empty (pending: 実際の動作は正常だが、テスト環境ではDB collation問題のため失敗)' do
         post '/api/v1/cta_buttons/bulk_update', params: visible_false_params, headers: headers
         expect(response).to have_http_status(:success)
-        
+
         buttons = tenant.cta_buttons.reload.ordered
         expect(buttons.length).to eq(2)
         expect(buttons[0].visible).to be false

@@ -60,7 +60,7 @@ module Api
 
       def bulk_update
         # 複数のナビアイテムを一括更新
-        items_params = params.permit(navigation_items: [:label, :url, :position, :visible], navigation_item: {})[:navigation_items] || []
+        items_params = params.permit(navigation_items: [ :label, :url, :position, :visible ], navigation_item: {})[:navigation_items] || []
 
         # 既存のアイテムを削除
         @tenant.navigation_items.destroy_all
@@ -73,7 +73,7 @@ module Api
           # ActionController::Parametersをハッシュに変換
           item_hash = item_params.to_h if item_params.respond_to?(:to_h)
           item_hash ||= item_params
-          
+
           # visible: falseでも、labelとurlが両方入力されていれば保存
           next if item_hash[:label].blank? && item_hash[:url].blank?
 

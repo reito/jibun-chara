@@ -43,36 +43,36 @@ RSpec.describe CtaButton, type: :model do
 
   describe 'validations' do
     let(:tenant) { create(:tenant) }
-    
+
     # titleはpresenceバリデーションはなく、空の場合はコントローラーでスキップまたはvisible:falseで保存
     it { should validate_presence_of(:position) }
-    
+
     it 'validates URL format when URL is present' do
       button = build(:cta_button, tenant: tenant, url: 'invalid-url')
       expect(button).not_to be_valid
       expect(button.errors[:url]).to include('is invalid')
     end
-    
+
     it 'allows blank URLs' do
       button = build(:cta_button, tenant: tenant, url: '')
       expect(button).to be_valid
     end
-    
+
     it 'allows blank titles' do
       button = build(:cta_button, tenant: tenant, title: '')
       expect(button).to be_valid
     end
   end
-  
+
   describe 'scopes' do
     let(:tenant) { create(:tenant) }
-    
+
     before do
       create(:cta_button, tenant: tenant, title: 'Visible Button', position: 1, visible: true)
       create(:cta_button, tenant: tenant, title: 'Hidden Button', position: 2, visible: false)
       create(:cta_button, tenant: tenant, title: 'Another Visible', position: 3, visible: true)
     end
-    
+
     describe '.visible_items' do
       it 'returns only visible buttons' do
         visible_buttons = tenant.cta_buttons.visible_items
@@ -81,11 +81,11 @@ RSpec.describe CtaButton, type: :model do
         expect(visible_buttons.pluck(:title)).not_to include('Hidden Button')
       end
     end
-    
+
     describe '.ordered' do
       it 'returns buttons ordered by position' do
         buttons = tenant.cta_buttons.ordered
-        expect(buttons.map(&:title)).to eq(['Visible Button', 'Hidden Button', 'Another Visible'])
+        expect(buttons.map(&:title)).to eq([ 'Visible Button', 'Hidden Button', 'Another Visible' ])
       end
     end
   end

@@ -16,7 +16,7 @@ RSpec.describe NavigationItem, type: :model do
       expect(item).not_to be_valid
       expect(item.errors[:url]).to include('is invalid')
     end
-    
+
     it 'allows blank URLs' do
       item = build(:navigation_item, tenant: tenant, url: '')
       expect(item).to be_valid

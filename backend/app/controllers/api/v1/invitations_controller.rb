@@ -2,7 +2,6 @@ module Api
   module V1
     class InvitationsController < ApplicationController
       def create
-
         # パラメータの存在確認
         unless params[:tenant]
           Rails.logger.error "Missing tenant parameter"

@@ -3,9 +3,9 @@ class NavigationItem < ApplicationRecord
 
   validates :label, presence: true, length: { maximum: 50 }
   validates :url, format: { with: URI::DEFAULT_PARSER.make_regexp }, if: :url_present?
-  
+
   private
-  
+
   def url_present?
     url.present?
   end
