@@ -15,6 +15,8 @@ import Invite from './pages/Invite'
 import Admin from './pages/Admin'
 import NotFound from './pages/NotFound'
 import RegisterPage from './pages/RegisterPage'
+import LoginPage from './pages/LoginPage'
+import { AuthProvider } from './contexts/AuthContext'
 import apiClient from './api/client'
 import './App.css'
 
@@ -122,21 +124,27 @@ const TopPage: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/invitation" element={<Invite basePath="/invitation" />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/404" element={<NotFound />} />
-        <Route path="/:slug" element={<SlugValidator />}>
-          <Route index element={<TopPage />} />
-          <Route path="dashboard" element={<Admin />} />
-          <Route path="quiz-female" element={<QuizFemale />} />
-          <Route path="quiz-male" element={<QuizMale />} />
-          <Route path="result" element={<Result />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/invitation"
+            element={<Invite basePath="/invitation" />}
+          />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/404" element={<NotFound />} />
+          <Route path="/:slug" element={<SlugValidator />}>
+            <Route index element={<TopPage />} />
+            <Route path="dashboard" element={<Admin />} />
+            <Route path="quiz-female" element={<QuizFemale />} />
+            <Route path="quiz-male" element={<QuizMale />} />
+            <Route path="result" element={<Result />} />
+            <Route path="login" element={<LoginPage />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 
