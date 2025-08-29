@@ -16,6 +16,7 @@ import Admin from './pages/Admin'
 import NotFound from './pages/NotFound'
 import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
+import Header from './components/Header'
 import { AuthProvider } from './contexts/AuthContext'
 import apiClient from './api/client'
 import './App.css'
@@ -75,47 +76,50 @@ const TopPage: React.FC = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="top-page-container">
-      <div className="top-page-card">
-        <h1 className="top-page-title">あなたの恋愛タイプ診断</h1>
+    <div className="font-['Noto_Sans_JP',sans-serif] bg-[#f0f7f7] text-[#333] m-0 p-0 leading-relaxed min-h-screen">
+      <Header />
+      <div className="top-page-container">
+        <div className="top-page-card">
+          <h1 className="top-page-title">あなたの恋愛タイプ診断</h1>
 
-        <p className="top-page-description">
-          あなたの恋愛タイプを診断して、
-          <br />
-          理想の出会いを見つけましょう！
-        </p>
+          <p className="top-page-description">
+            あなたの恋愛タイプを診断して、
+            <br />
+            理想の出会いを見つけましょう！
+          </p>
 
-        <div className="button-container">
-          <button
-            onClick={() => navigate(`/${slug}/quiz-female`)}
-            className="gender-button gender-button-female"
-          >
-            女性
-          </button>
-          <button
-            onClick={() => navigate(`/${slug}/quiz-male`)}
-            className="gender-button gender-button-male"
-          >
-            男性
-          </button>
-        </div>
+          <div className="button-container">
+            <button
+              onClick={() => navigate(`/${slug}/quiz-female`)}
+              className="gender-button gender-button-female"
+            >
+              女性
+            </button>
+            <button
+              onClick={() => navigate(`/${slug}/quiz-male`)}
+              className="gender-button gender-button-male"
+            >
+              男性
+            </button>
+          </div>
 
-        <div className="features-section">
-          <h2 className="features-title">診断テストの特徴</h2>
-          <ul className="features-list">
-            <li className="feature-item">
-              <span className="feature-check">✓</span>
-              所要時間はわずか2分程度
-            </li>
-            <li className="feature-item">
-              <span className="feature-check">✓</span>
-              あなたの性格や価値観を3タイプで診断
-            </li>
-            <li className="feature-item">
-              <span className="feature-check">✓</span>
-              あなたの恋愛スタイルが明確になります
-            </li>
-          </ul>
+          <div className="features-section">
+            <h2 className="features-title">診断テストの特徴</h2>
+            <ul className="features-list">
+              <li className="feature-item">
+                <span className="feature-check">✓</span>
+                所要時間はわずか2分程度
+              </li>
+              <li className="feature-item">
+                <span className="feature-check">✓</span>
+                あなたの性格や価値観を3タイプで診断
+              </li>
+              <li className="feature-item">
+                <span className="feature-check">✓</span>
+                あなたの恋愛スタイルが明確になります
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
