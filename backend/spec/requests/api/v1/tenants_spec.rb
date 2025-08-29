@@ -5,6 +5,11 @@ RSpec.describe "Api::V1::Tenants", type: :request do
   let(:valid_attributes) { attributes_for(:tenant) }
   let(:invalid_attributes) { attributes_for(:tenant, :invalid_slug) }
 
+  before do
+    # CI環境でのホストの問題を回避
+    host! 'localhost'
+  end
+
   describe "GET /api/v1/tenants/validate/:slug" do
     context "when tenant exists" do
       it "returns valid: true" do
