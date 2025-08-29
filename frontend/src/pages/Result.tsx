@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams, Link, useParams } from 'react-router-dom'
 import Header from '../components/Header'
+import axios from 'axios'
 
 // 画像のインポート
 import kingImage from '../assets/img/character-king.png'
@@ -30,6 +31,16 @@ interface CharacterImages {
         male: CharacterImage
         female: CharacterImage
       }
+}
+
+interface CtaButton {
+  id: number
+  title: string
+  subtitle: string
+  url: string
+  description: string
+  position: number
+  visible: boolean
 }
 
 const characterImages: CharacterImages = {
@@ -100,6 +111,7 @@ const Result: React.FC = () => {
   const [characterData, setCharacterData] = useState<CharacterImage | null>(
     null,
   )
+  const [ctaButtons, setCtaButtons] = useState<CtaButton[]>([])
   const { slug } = useParams()
 
   useEffect(() => {
@@ -201,7 +213,28 @@ const Result: React.FC = () => {
         setCharacterData(selectedImage)
       }
     }
-  }, [searchParams])
+
+    // CTAボタンを読み込み
+    const loadCtaButtons = async () => {
+      try {
+        const API_BASE_URL =
+          import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1'
+        const response = await axios.get(
+          `${API_BASE_URL}/tenants/${slug}/cta_buttons`,
+        )
+
+        if (response.data.status === 'success' && response.data.data) {
+          setCtaButtons(response.data.data)
+        }
+      } catch {
+        // CTA buttons loading failed, use default empty array
+      }
+    }
+
+    if (slug) {
+      loadCtaButtons()
+    }
+  }, [searchParams, slug])
 
   const descriptions: { [key: string]: string } = {
     アイドルタイプ:
@@ -360,47 +393,81 @@ const Result: React.FC = () => {
             </p>
 
             <div className="flex flex-col gap-5 items-center">
-              <div className="w-full max-w-[320px]">
-                <a
-                  href="https://lin.ee/qSZORFf"
-                  className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
-                >
-                  運命のパートナーが見つけやすくなる
-                  <br />
-                  トータルコーディネート
-                </a>
-                <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
-                  外見＆内面！あなたが引き寄せたい理想の相手と出会うポイントを詳しく解説！
-                </p>
-              </div>
+              {ctaButtons.length > 0 ? (
+                ctaButtons
+                  .filter(
+                    (button) => button.visible && button.title && button.url,
+                  )
+                  .map((button) => (
+                    <div
+                      key={button.id || button.position}
+                      className="w-full max-w-[320px]"
+                    >
+                      <a
+                        href={button.url}
+                        className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] min-h-[50px]"
+                      >
+                        {button.title}
+                        {button.subtitle && (
+                          <>
+                            <br />
+                            {button.subtitle}
+                          </>
+                        )}
+                      </a>
+                      {button.description && (
+                        <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
+                          {button.description}
+                        </p>
+                      )}
+                    </div>
+                  ))
+              ) : (
+                // デフォルトのCTAボタン（データがない場合）
+                <>
+                  <div className="w-full max-w-[320px]">
+                    <a
+                      href="https://lin.ee/qSZORFf"
+                      className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
+                    >
+                      運命のパートナーが見つけやすくなる
+                      <br />
+                      トータルコーディネート
+                    </a>
+                    <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
+                      外見＆内面！あなたが引き寄せたい理想の相手と出会うポイントを詳しく解説！
+                    </p>
+                  </div>
 
-              <div className="w-full max-w-[320px]">
-                <a
-                  href="https://trial-marriage-hunting.vercel.app/"
-                  className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
-                >
-                  婚活に興味はあるけど不安な方へ
-                  <br />
-                  おためし婚活カウンセリング
-                </a>
-                <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
-                  理想の出会いに向けて、あなたに合った婚活方法を提案しながらおためし婚活ができます！
-                </p>
-              </div>
+                  <div className="w-full max-w-[320px]">
+                    <a
+                      href="https://trial-marriage-hunting.vercel.app/"
+                      className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
+                    >
+                      婚活に興味はあるけど不安な方へ
+                      <br />
+                      おためし婚活カウンセリング
+                    </a>
+                    <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
+                      理想の出会いに向けて、あなたに合った婚活方法を提案しながらおためし婚活ができます！
+                    </p>
+                  </div>
 
-              <div className="w-full max-w-[320px]">
-                <a
-                  href="https://square.link/u/vQEat01w"
-                  className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
-                >
-                  自分の取り扱い説明書を手に入れて
-                  <br />
-                  パートナー探しに活かす
-                </a>
-                <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
-                  あなたのキャラタイプを婚活に活かすヒントをもっと深く知りたくありませんか？
-                </p>
-              </div>
+                  <div className="w-full max-w-[320px]">
+                    <a
+                      href="https://square.link/u/vQEat01w"
+                      className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
+                    >
+                      自分の取り扱い説明書を手に入れて
+                      <br />
+                      パートナー探しに活かす
+                    </a>
+                    <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
+                      あなたのキャラタイプを婚活に活かすヒントをもっと深く知りたくありませんか？
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 

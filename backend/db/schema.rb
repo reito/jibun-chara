@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_29_033329) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_29_082748) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,7 +23,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_29_033329) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "subtitle"
+    t.text "description"
     t.index ["tenant_id"], name: "index_cta_buttons_on_tenant_id"
+  end
+
+  create_table "navigation_items", force: :cascade do |t|
+    t.bigint "tenant_id", null: false
+    t.string "label"
+    t.string "url"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "visible", default: true
+    t.index ["tenant_id"], name: "index_navigation_items_on_tenant_id"
   end
 
   create_table "tenants", force: :cascade do |t|
@@ -55,4 +68,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_29_033329) do
   end
 
   add_foreign_key "cta_buttons", "tenants"
+  add_foreign_key "navigation_items", "tenants"
 end

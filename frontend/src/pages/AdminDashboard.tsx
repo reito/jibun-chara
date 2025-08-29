@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { logoutUser } from '../api/auth'
+import PageDesignManager from '../components/admin/PageDesignManager'
 
 interface MenuItem {
   id: string
@@ -148,6 +149,9 @@ const AdminDashboard: React.FC = () => {
             </div>
           </div>
         )
+
+      case 'page-design':
+        return <PageDesignManager />
 
       default:
         return (

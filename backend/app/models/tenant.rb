@@ -1,6 +1,7 @@
 class Tenant < ApplicationRecord
   has_one :user
   has_many :cta_buttons, dependent: :destroy
+  has_many :navigation_items, dependent: :destroy
 
   validates :name, presence: true
   validates :slug, presence: true, uniqueness: true,

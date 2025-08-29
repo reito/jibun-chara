@@ -2,29 +2,6 @@ module Api
   module V1
     class InvitationsController < ApplicationController
       def create
-        Rails.logger.info "=== Invitation creation started ==="
-        Rails.logger.info "Params: #{params.inspect}"
-        Rails.logger.info "Environment: #{Rails.env}"
-        Rails.logger.info "FRONTEND_URL: #{ENV['FRONTEND_URL']}"
-
-        # データベース接続テスト
-        Rails.logger.info "=== Database Connection Test ==="
-        Rails.logger.info "DATABASE_URL: #{ENV['DATABASE_URL']}"
-        Rails.logger.info "POSTGRES_PASSWORD: #{ENV['POSTGRES_PASSWORD'] ? 'SET' : 'NOT SET'}"
-
-        begin
-          ActiveRecord::Base.connection.execute("SELECT 1")
-          Rails.logger.info "Database connection successful"
-        rescue => e
-          Rails.logger.error "Database connection failed: #{e.message}"
-          render json: {
-            status: "error",
-            errors: [ "Database connection failed" ],
-            message: e.message
-          }, status: :internal_server_error
-          return
-        end
-
         # パラメータの存在確認
         unless params[:tenant]
           Rails.logger.error "Missing tenant parameter"
@@ -36,14 +13,9 @@ module Api
         end
 
         @tenant = Tenant.new(tenant_params)
-        Rails.logger.info "Tenant object created: #{@tenant.inspect}"
-        Rails.logger.info "Tenant valid?: #{@tenant.valid?}"
-        Rails.logger.info "Tenant errors: #{@tenant.errors.full_messages}" unless @tenant.valid?
 
         if @tenant.save
-          Rails.logger.info "Tenant saved successfully with ID: #{@tenant.id}"
           invite_url = generate_invite_url(@tenant.unique_token)
-          Rails.logger.info "Generated invite URL: #{invite_url}"
 
           render json: {
             status: "success",
@@ -76,8 +48,6 @@ module Api
 
       def generate_invite_url(token)
         frontend_url = ENV["FRONTEND_URL"] || default_frontend_url
-        Rails.logger.info "Frontend URL: #{frontend_url}"
-        Rails.logger.info "Token: #{token}"
         "#{frontend_url}/register?token=#{token}"
       end
 

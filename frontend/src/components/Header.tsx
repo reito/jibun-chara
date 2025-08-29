@@ -1,15 +1,47 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import axios from 'axios'
 
 interface HeaderProps {
   title?: string
+}
+
+interface NavigationItem {
+  id: number
+  label: string
+  url: string
+  position: number
+  visible: boolean
 }
 
 const Header: React.FC<HeaderProps> = ({ title = 'じぶんキャラ診断' }) => {
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
   const { user } = useAuth()
+  const [navigationItems, setNavigationItems] = useState<NavigationItem[]>([])
+
+  useEffect(() => {
+    const loadNavigationItems = async () => {
+      try {
+        const API_BASE_URL =
+          import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1'
+        const response = await axios.get(
+          `${API_BASE_URL}/tenants/${slug}/navigation_items`,
+        )
+
+        if (response.data.status === 'success' && response.data.data) {
+          setNavigationItems(response.data.data)
+        }
+      } catch {
+        // Navigation items loading failed, continue without them
+      }
+    }
+
+    if (slug) {
+      loadNavigationItems()
+    }
+  }, [slug])
 
   return (
     <>
@@ -22,33 +54,27 @@ const Header: React.FC<HeaderProps> = ({ title = 'じぶんキャラ診断' }) =
         </h1>
       </header>
 
-      <nav className="relative bg-white py-[10px] px-[15px] shadow-[0_4px_6px_rgba(0,0,0,0.05)]">
+      <nav className="relative bg-white py-[10px] px-[15px] shadow-[0_4px_6px_rgba(0,0,0,0.05)] min-h-[48px] flex items-center">
         {/* 中央: メインナビゲーション */}
-        <div className="flex justify-center flex-wrap">
-          <a
-            href="https://blanca715.com/"
-            className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap"
-          >
-            相談所トップ
-          </a>
-          <a
-            href="https://blanca715.com/category/%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88/"
-            className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap"
-          >
-            イベント情報
-          </a>
-          <a
-            href="https://blanca715.com/contact/"
-            className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap"
-          >
-            無料相談予約
-          </a>
-          <a
-            href="https://blanca715.com/achievement/"
-            className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap"
-          >
-            成婚事例
-          </a>
+        <div className="flex justify-center flex-wrap flex-1">
+          {navigationItems.filter(
+            (item) => item.visible && item.label && item.url,
+          ).length > 0 ? (
+            navigationItems
+              .filter((item) => item.visible && item.label && item.url)
+              .map((item) => (
+                <a
+                  key={item.id || item.position}
+                  href={item.url}
+                  className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap hover:text-[#4fa5b5]"
+                >
+                  {item.label}
+                </a>
+              ))
+          ) : (
+            // ナビアイテムが0個の時も高さを保持
+            <div className="h-[28px]"></div>
+          )}
         </div>
 
         {/* 右端: 管理者ボタン（ログイン済み管理者のみ表示） */}

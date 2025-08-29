@@ -30,21 +30,15 @@ const SlugValidator: React.FC = () => {
 
   useEffect(() => {
     const validateSlug = async () => {
-      console.log('Validating slug:', slug)
-
       if (!slug) {
-        console.log('No slug provided')
         setIsLoading(false)
         return
       }
 
       try {
-        console.log('Making API request to validate slug')
         const response = await apiClient.get(`/tenants/validate/${slug}`)
-        console.log('API response:', response.data)
         setIsValidSlug(response.data.valid)
         if (!response.data.valid) {
-          console.log('Invalid slug, redirecting to 404')
           navigate('/404')
         }
       } catch (error) {
@@ -57,8 +51,6 @@ const SlugValidator: React.FC = () => {
 
     validateSlug()
   }, [slug, navigate, location.pathname])
-
-  console.log('SlugValidator render:', { slug, isLoading, isValidSlug })
 
   if (isLoading) {
     return <div className="loading-container">Loading...</div>
