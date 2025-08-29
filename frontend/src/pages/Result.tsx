@@ -217,9 +217,12 @@ const Result: React.FC = () => {
     // CTAボタンを読み込み
     const loadCtaButtons = async () => {
       try {
-        const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1'
-        const response = await axios.get(`${API_BASE_URL}/tenants/${slug}/cta_buttons`)
-        
+        const API_BASE_URL =
+          import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1'
+        const response = await axios.get(
+          `${API_BASE_URL}/tenants/${slug}/cta_buttons`,
+        )
+
         if (response.data.status === 'success' && response.data.data) {
           setCtaButtons(response.data.data)
         }
@@ -391,27 +394,34 @@ const Result: React.FC = () => {
 
             <div className="flex flex-col gap-5 items-center">
               {ctaButtons.length > 0 ? (
-                ctaButtons.filter(button => button.visible && button.title && button.url).map((button) => (
-                  <div key={button.id || button.position} className="w-full max-w-[320px]">
-                    <a
-                      href={button.url}
-                      className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] min-h-[50px]"
+                ctaButtons
+                  .filter(
+                    (button) => button.visible && button.title && button.url,
+                  )
+                  .map((button) => (
+                    <div
+                      key={button.id || button.position}
+                      className="w-full max-w-[320px]"
                     >
-                      {button.title}
-                      {button.subtitle && (
-                        <>
-                          <br />
-                          {button.subtitle}
-                        </>
+                      <a
+                        href={button.url}
+                        className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] min-h-[50px]"
+                      >
+                        {button.title}
+                        {button.subtitle && (
+                          <>
+                            <br />
+                            {button.subtitle}
+                          </>
+                        )}
+                      </a>
+                      {button.description && (
+                        <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
+                          {button.description}
+                        </p>
                       )}
-                    </a>
-                    {button.description && (
-                      <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
-                        {button.description}
-                      </p>
-                    )}
-                  </div>
-                ))
+                    </div>
+                  ))
               ) : (
                 // デフォルトのCTAボタン（データがない場合）
                 <>

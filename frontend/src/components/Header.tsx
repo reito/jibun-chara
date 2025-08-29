@@ -57,16 +57,20 @@ const Header: React.FC<HeaderProps> = ({ title = 'じぶんキャラ診断' }) =
       <nav className="relative bg-white py-[10px] px-[15px] shadow-[0_4px_6px_rgba(0,0,0,0.05)] min-h-[48px] flex items-center">
         {/* 中央: メインナビゲーション */}
         <div className="flex justify-center flex-wrap flex-1">
-          {navigationItems.filter(item => item.visible && item.label && item.url).length > 0 ? (
-            navigationItems.filter(item => item.visible && item.label && item.url).map((item) => (
-              <a
-                key={item.id || item.position}
-                href={item.url}
-                className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap hover:text-[#4fa5b5]"
-              >
-                {item.label}
-              </a>
-            ))
+          {navigationItems.filter(
+            (item) => item.visible && item.label && item.url,
+          ).length > 0 ? (
+            navigationItems
+              .filter((item) => item.visible && item.label && item.url)
+              .map((item) => (
+                <a
+                  key={item.id || item.position}
+                  href={item.url}
+                  className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap hover:text-[#4fa5b5]"
+                >
+                  {item.label}
+                </a>
+              ))
           ) : (
             // ナビアイテムが0個の時も高さを保持
             <div className="h-[28px]"></div>
