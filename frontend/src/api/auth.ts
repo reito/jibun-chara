@@ -62,22 +62,44 @@ export const registerUser = async (token: string, data: RegistrationData) => {
 
 export const loginUser = async (data: LoginData) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/auth/login`, data)
+    const response = await axios.post(`${API_BASE_URL}/sessions`, data)
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.data?.error || 'ログインに失敗しました')
+      throw new Error(error.response?.data?.message || 'ログインに失敗しました')
     }
     throw error
   }
 }
 
-export const logoutUser = async () => {
+export const logoutUser = async (token: string) => {
   try {
-    await axios.delete(`${API_BASE_URL}/auth/logout`)
+    await axios.delete(`${API_BASE_URL}/sessions`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.data?.error || 'ログアウトに失敗しました')
+      throw new Error(
+        error.response?.data?.message || 'ログアウトに失敗しました',
+      )
+    }
+    throw error
+  }
+}
+
+export const validateSession = async (token: string) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/sessions/validate`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return response.data
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || 'セッションが無効です')
     }
     throw error
   }

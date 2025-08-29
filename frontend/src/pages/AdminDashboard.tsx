@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
+import { logoutUser } from '../api/auth'
 
 interface MenuItem {
   id: string
@@ -49,8 +51,45 @@ const menuItems: MenuItem[] = [
 
 const AdminDashboard: React.FC = () => {
   const { slug } = useParams<{ slug: string }>()
+  const navigate = useNavigate()
+  const { user, token, logout, isLoading } = useAuth()
   const [selectedMenu, setSelectedMenu] = useState('overview')
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
+  useEffect(() => {
+    if (!isLoading && (!user || !token)) {
+      navigate(`/${slug}/login`)
+    }
+  }, [user, token, isLoading, slug, navigate])
+
+  const handleLogout = async () => {
+    try {
+      if (token) {
+        await logoutUser(token)
+      }
+      logout()
+      navigate(`/${slug}/login`)
+    } catch (error) {
+      console.error('Logout error:', error)
+      logout()
+      navigate(`/${slug}/login`)
+    }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">読み込み中...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!user || !token) {
+    return null
+  }
 
   const handleMenuClick = (menuId: string) => {
     setSelectedMenu(menuId)
@@ -163,6 +202,10 @@ const AdminDashboard: React.FC = () => {
           <div className="p-6 border-b">
             <h1 className="text-xl font-bold text-gray-800">相談所管理画面</h1>
             <p className="text-sm text-gray-500 mt-1">{slug}</p>
+            <div className="mt-3 p-2 bg-gray-50 rounded">
+              <p className="text-xs text-gray-600">ログイン中:</p>
+              <p className="text-sm font-medium text-gray-800">{user.name}</p>
+            </div>
           </div>
 
           {/* メニューアイテム */}
@@ -192,14 +235,21 @@ const AdminDashboard: React.FC = () => {
             </ul>
           </nav>
 
-          {/* サイトプレビューボタン */}
-          <div className="px-4 py-4 border-t">
+          {/* アクションボタン */}
+          <div className="px-4 py-4 border-t space-y-2">
             <button
               onClick={() => window.open(`/${slug}`, '_blank')}
               className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200 text-sm font-medium flex items-center justify-center space-x-2"
             >
               <span>🔗</span>
               <span>プレビュー</span>
+            </button>
+            <button
+              onClick={handleLogout}
+              className="w-full py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-200 text-sm font-medium flex items-center justify-center space-x-2"
+            >
+              <span>🚪</span>
+              <span>ログアウト</span>
             </button>
           </div>
         </div>
