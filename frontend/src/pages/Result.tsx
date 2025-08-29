@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams, Link, useParams } from 'react-router-dom'
+import Header from '../components/Header'
 
 // 画像のインポート
 import kingImage from '../assets/img/character-king.png'
@@ -236,182 +237,185 @@ const Result: React.FC = () => {
   const userGender = searchParams.get('gender') || 'female'
 
   return (
-    <div className="font-['Noto_Sans_JP',sans-serif] bg-[#f0f7f7] m-0 p-5 text-center text-[#333] leading-relaxed min-h-screen flex flex-col justify-center">
-      <div className="bg-white py-10 px-[30px] rounded-[15px] shadow-[0_8px_20px_rgba(106,193,208,0.1)] mx-auto max-w-[600px] w-full box-border border border-[rgba(106,193,208,0.1)]">
-        <h1 className="text-[#5fb5d0] text-[28px] m-0 mb-[30px] font-bold leading-[1.4]">
-          診断結果
-        </h1>
+    <div className="font-['Noto_Sans_JP',sans-serif] bg-[#f0f7f7] m-0 p-0 text-center text-[#333] leading-relaxed min-h-screen">
+      <Header title="診断結果" />
+      <div className="p-5 flex flex-col justify-center min-h-[calc(100vh-120px)]">
+        <div className="bg-white py-10 px-[30px] rounded-[15px] shadow-[0_8px_20px_rgba(106,193,208,0.1)] mx-auto max-w-[600px] w-full box-border border border-[rgba(106,193,208,0.1)]">
+          <h1 className="text-[#5fb5d0] text-[28px] m-0 mb-[30px] font-bold leading-[1.4]">
+            診断結果
+          </h1>
 
-        <div className="text-[22px] font-bold mb-[25px] text-[#2c3e50] leading-[1.4] px-[10px]">
-          あなたのタイプは「{displayType}」です！
-        </div>
-
-        {characterData && (
-          <div>
-            <img
-              src={characterData.image}
-              alt={characterData.name}
-              className="w-[200px] h-auto my-5 mx-auto block rounded-[10px] shadow-[0_4px_10px_rgba(0,0,0,0.1)]"
-            />
-            <div className="text-sm text-[#666] my-[10px] text-center">
-              {characterData.name}
-            </div>
+          <div className="text-[22px] font-bold mb-[25px] text-[#2c3e50] leading-[1.4] px-[10px]">
+            あなたのタイプは「{displayType}」です！
           </div>
-        )}
 
-        <div className="max-w-[600px] my-[30px] mx-auto p-5 bg-white rounded-xl shadow-[0_4px_15px_rgba(106,193,208,0.1)]">
-          {userGender === 'female' ? (
-            <>
-              <div className="my-5">
-                <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
-                  <span>アイドルタイプ</span>
-                  <span>{scores['アイドルタイプ']}%</span>
-                </div>
-                <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
-                    style={{ width: `${scores['アイドルタイプ']}%` }}
-                  />
-                </div>
+          {characterData && (
+            <div>
+              <img
+                src={characterData.image}
+                alt={characterData.name}
+                className="w-[200px] h-auto my-5 mx-auto block rounded-[10px] shadow-[0_4px_10px_rgba(0,0,0,0.1)]"
+              />
+              <div className="text-sm text-[#666] my-[10px] text-center">
+                {characterData.name}
               </div>
-
-              <div className="my-5">
-                <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
-                  <span>バリキャリタイプ</span>
-                  <span>{scores['バリキャリタイプ']}%</span>
-                </div>
-                <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
-                    style={{ width: `${scores['バリキャリタイプ']}%` }}
-                  />
-                </div>
-              </div>
-
-              <div className="my-5">
-                <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
-                  <span>マザータイプ</span>
-                  <span>{scores['マザータイプ']}%</span>
-                </div>
-                <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
-                    style={{ width: `${scores['マザータイプ']}%` }}
-                  />
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="my-5">
-                <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
-                  <span>キングタイプ</span>
-                  <span>{scores['キングタイプ']}%</span>
-                </div>
-                <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
-                    style={{ width: `${scores['キングタイプ']}%` }}
-                  />
-                </div>
-              </div>
-
-              <div className="my-5">
-                <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
-                  <span>ナイトタイプ</span>
-                  <span>{scores['ナイトタイプ']}%</span>
-                </div>
-                <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
-                    style={{ width: `${scores['ナイトタイプ']}%` }}
-                  />
-                </div>
-              </div>
-
-              <div className="my-5">
-                <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
-                  <span>プリンスタイプ</span>
-                  <span>{scores['プリンスタイプ']}%</span>
-                </div>
-                <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
-                    style={{ width: `${scores['プリンスタイプ']}%` }}
-                  />
-                </div>
-              </div>
-            </>
+            </div>
           )}
-        </div>
 
-        <div className="text-base mb-[30px] text-[#456] leading-[1.8] text-left px-[15px]">
-          {descriptions[displayType]}
-        </div>
+          <div className="max-w-[600px] my-[30px] mx-auto p-5 bg-white rounded-xl shadow-[0_4px_15px_rgba(106,193,208,0.1)]">
+            {userGender === 'female' ? (
+              <>
+                <div className="my-5">
+                  <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
+                    <span>アイドルタイプ</span>
+                    <span>{scores['アイドルタイプ']}%</span>
+                  </div>
+                  <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
+                      style={{ width: `${scores['アイドルタイプ']}%` }}
+                    />
+                  </div>
+                </div>
 
-        <div className="text-center my-[35px] px-[15px]">
-          <p className="text-[#FF69B4] text-[19px] font-medium mb-[25px] leading-relaxed">
-            あなたの恋愛・婚活の可能性を広げるために...
-            <br />
-            気になる方をチェック！ ✨
-          </p>
+                <div className="my-5">
+                  <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
+                    <span>バリキャリタイプ</span>
+                    <span>{scores['バリキャリタイプ']}%</span>
+                  </div>
+                  <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
+                      style={{ width: `${scores['バリキャリタイプ']}%` }}
+                    />
+                  </div>
+                </div>
 
-          <div className="flex flex-col gap-5 items-center">
-            <div className="w-full max-w-[320px]">
-              <a
-                href="https://lin.ee/qSZORFf"
-                className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
-              >
-                運命のパートナーが見つけやすくなる
-                <br />
-                トータルコーディネート
-              </a>
-              <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
-                外見＆内面！あなたが引き寄せたい理想の相手と出会うポイントを詳しく解説！
-              </p>
-            </div>
+                <div className="my-5">
+                  <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
+                    <span>マザータイプ</span>
+                    <span>{scores['マザータイプ']}%</span>
+                  </div>
+                  <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
+                      style={{ width: `${scores['マザータイプ']}%` }}
+                    />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="my-5">
+                  <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
+                    <span>キングタイプ</span>
+                    <span>{scores['キングタイプ']}%</span>
+                  </div>
+                  <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
+                      style={{ width: `${scores['キングタイプ']}%` }}
+                    />
+                  </div>
+                </div>
 
-            <div className="w-full max-w-[320px]">
-              <a
-                href="https://trial-marriage-hunting.vercel.app/"
-                className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
-              >
-                婚活に興味はあるけど不安な方へ
-                <br />
-                おためし婚活カウンセリング
-              </a>
-              <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
-                理想の出会いに向けて、あなたに合った婚活方法を提案しながらおためし婚活ができます！
-              </p>
-            </div>
+                <div className="my-5">
+                  <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
+                    <span>ナイトタイプ</span>
+                    <span>{scores['ナイトタイプ']}%</span>
+                  </div>
+                  <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
+                      style={{ width: `${scores['ナイトタイプ']}%` }}
+                    />
+                  </div>
+                </div>
 
-            <div className="w-full max-w-[320px]">
-              <a
-                href="https://square.link/u/vQEat01w"
-                className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
-              >
-                自分の取り扱い説明書を手に入れて
-                <br />
-                パートナー探しに活かす
-              </a>
-              <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
-                あなたのキャラタイプを婚活に活かすヒントをもっと深く知りたくありませんか？
-              </p>
+                <div className="my-5">
+                  <div className="flex justify-between mb-2 font-medium text-[#2c3e50]">
+                    <span>プリンスタイプ</span>
+                    <span>{scores['プリンスタイプ']}%</span>
+                  </div>
+                  <div className="w-full h-6 bg-[#e9f5f7] rounded-xl overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] transition-[width] duration-1000 ease-[ease]"
+                      style={{ width: `${scores['プリンスタイプ']}%` }}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="text-base mb-[30px] text-[#456] leading-[1.8] text-left px-[15px]">
+            {descriptions[displayType]}
+          </div>
+
+          <div className="text-center my-[35px] px-[15px]">
+            <p className="text-[#FF69B4] text-[19px] font-medium mb-[25px] leading-relaxed">
+              あなたの恋愛・婚活の可能性を広げるために...
+              <br />
+              気になる方をチェック！ ✨
+            </p>
+
+            <div className="flex flex-col gap-5 items-center">
+              <div className="w-full max-w-[320px]">
+                <a
+                  href="https://lin.ee/qSZORFf"
+                  className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
+                >
+                  運命のパートナーが見つけやすくなる
+                  <br />
+                  トータルコーディネート
+                </a>
+                <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
+                  外見＆内面！あなたが引き寄せたい理想の相手と出会うポイントを詳しく解説！
+                </p>
+              </div>
+
+              <div className="w-full max-w-[320px]">
+                <a
+                  href="https://trial-marriage-hunting.vercel.app/"
+                  className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
+                >
+                  婚活に興味はあるけど不安な方へ
+                  <br />
+                  おためし婚活カウンセリング
+                </a>
+                <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
+                  理想の出会いに向けて、あなたに合った婚活方法を提案しながらおためし婚活ができます！
+                </p>
+              </div>
+
+              <div className="w-full max-w-[320px]">
+                <a
+                  href="https://square.link/u/vQEat01w"
+                  className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
+                >
+                  自分の取り扱い説明書を手に入れて
+                  <br />
+                  パートナー探しに活かす
+                </a>
+                <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
+                  あなたのキャラタイプを婚活に活かすヒントをもっと深く知りたくありませんか？
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="text-center mt-[30px]">
-          <Link
-            to={`/${slug}`}
-            className="bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] text-white border-none py-[14px] px-[25px] text-[15px] font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] inline-block no-underline max-w-[200px] shadow-[0_5px_15px_rgba(106,193,208,0.2)] text-center tracking-[0.5px] leading-[1.5]"
-          >
-            診断トップに戻る
-          </Link>
-        </div>
+          <div className="text-center mt-[30px]">
+            <Link
+              to={`/${slug}`}
+              className="bg-gradient-to-br from-[#6ac1d0] to-[#5fb5d0] text-white border-none py-[14px] px-[25px] text-[15px] font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] inline-block no-underline max-w-[200px] shadow-[0_5px_15px_rgba(106,193,208,0.2)] text-center tracking-[0.5px] leading-[1.5]"
+            >
+              診断トップに戻る
+            </Link>
+          </div>
 
-        <div className="mt-[50px] text-[#666] text-xs">
-          © 2025 BLANCA. All rights reserved.
+          <div className="mt-[50px] text-[#666] text-xs">
+            © 2025 BLANCA. All rights reserved.
+          </div>
         </div>
       </div>
     </div>

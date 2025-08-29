@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import Header from '../components/Header'
 
 interface Question {
   id: number
@@ -323,41 +324,7 @@ const QuizMale: React.FC = () => {
 
   return (
     <div className="font-['Noto_Sans_JP',sans-serif] bg-[#f0f7f7] text-[#333] m-0 p-0 leading-relaxed">
-      <header className="bg-[linear-gradient(135deg,#6ac1d0_0%,#5fb5d0_100%)] p-5 text-center text-white relative shadow-[0_4px_15px_rgba(106,193,208,0.2)]">
-        <h1
-          className="m-0 text-[24px] font-bold tracking-[1px]"
-          style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)' }}
-        >
-          じぶんキャラ診断
-        </h1>
-      </header>
-
-      <nav className="flex justify-center flex-wrap bg-white py-[10px] px-[5px] shadow-[0_4px_6px_rgba(0,0,0,0.05)]">
-        <a
-          href="https://blanca715.com/"
-          className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap"
-        >
-          相談所トップ
-        </a>
-        <a
-          href="https://blanca715.com/category/%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88/"
-          className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap"
-        >
-          イベント情報
-        </a>
-        <a
-          href="https://blanca715.com/contact/"
-          className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap"
-        >
-          無料相談予約
-        </a>
-        <a
-          href="https://blanca715.com/achievement/"
-          className="m-[5px_10px] p-[5px_10px] no-underline text-[#5fb5d0] font-medium text-sm relative transition-all duration-300 ease-[ease] whitespace-nowrap"
-        >
-          成婚事例
-        </a>
-      </nav>
+      <Header />
 
       <main className="py-5 px-[15px] max-w-[800px] mx-auto">
         <div className="bg-white rounded-xl p-[15px] mb-5 shadow-[0_8px_20px_rgba(106,193,208,0.1)] border border-[rgba(106,193,208,0.1)] text-center">
