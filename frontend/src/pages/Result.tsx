@@ -385,16 +385,18 @@ const Result: React.FC = () => {
             {descriptions[displayType]}
           </div>
 
-          <div className="text-center my-[35px] px-[15px]">
-            <p className="text-[#FF69B4] text-[19px] font-medium mb-[25px] leading-relaxed">
-              あなたの恋愛・婚活の可能性を広げるために...
-              <br />
-              気になる方をチェック！ ✨
-            </p>
+          {ctaButtons.filter(
+            (button) => button.visible && button.title && button.url,
+          ).length > 0 && (
+            <div className="text-center my-[35px] px-[15px]">
+              <p className="text-[#FF69B4] text-[19px] font-medium mb-[25px] leading-relaxed">
+                あなたの恋愛・婚活の可能性を広げるために...
+                <br />
+                気になる方をチェック！ ✨
+              </p>
 
-            <div className="flex flex-col gap-5 items-center">
-              {ctaButtons.length > 0 ? (
-                ctaButtons
+              <div className="flex flex-col gap-5 items-center">
+                {ctaButtons
                   .filter(
                     (button) => button.visible && button.title && button.url,
                   )
@@ -421,55 +423,10 @@ const Result: React.FC = () => {
                         </p>
                       )}
                     </div>
-                  ))
-              ) : (
-                // デフォルトのCTAボタン（データがない場合）
-                <>
-                  <div className="w-full max-w-[320px]">
-                    <a
-                      href="https://lin.ee/qSZORFf"
-                      className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
-                    >
-                      運命のパートナーが見つけやすくなる
-                      <br />
-                      トータルコーディネート
-                    </a>
-                    <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
-                      外見＆内面！あなたが引き寄せたい理想の相手と出会うポイントを詳しく解説！
-                    </p>
-                  </div>
-
-                  <div className="w-full max-w-[320px]">
-                    <a
-                      href="https://trial-marriage-hunting.vercel.app/"
-                      className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
-                    >
-                      婚活に興味はあるけど不安な方へ
-                      <br />
-                      おためし婚活カウンセリング
-                    </a>
-                    <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
-                      理想の出会いに向けて、あなたに合った婚活方法を提案しながらおためし婚活ができます！
-                    </p>
-                  </div>
-
-                  <div className="w-full max-w-[320px]">
-                    <a
-                      href="https://square.link/u/vQEat01w"
-                      className="bg-gradient-to-br from-[#FF88B3] to-[#FF69B4] text-white border-none py-4 px-5 text-sm font-semibold cursor-pointer rounded-[50px] transition-all duration-300 ease-[ease] flex items-center justify-center no-underline w-full box-border shadow-[0_5px_15px_rgba(255,136,179,0.2)] text-center tracking-[0.5px] leading-[1.4] whitespace-nowrap min-h-[50px]"
-                    >
-                      自分の取り扱い説明書を手に入れて
-                      <br />
-                      パートナー探しに活かす
-                    </a>
-                    <p className="text-sm text-[#666] font-normal leading-relaxed mt-2 mb-0 text-left">
-                      あなたのキャラタイプを婚活に活かすヒントをもっと深く知りたくありませんか？
-                    </p>
-                  </div>
-                </>
-              )}
+                  ))}
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="text-center mt-[30px]">
             <Link
