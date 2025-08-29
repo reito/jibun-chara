@@ -71,7 +71,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         () => {
           checkSession().then((isValid) => {
             if (!isValid) {
-              console.log('Session expired, user logged out')
+              // Session expired, user logged out
             }
           })
         },

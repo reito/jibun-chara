@@ -111,17 +111,7 @@ RSpec.describe "Api::V1::CtaButtons", type: :request do
         post '/api/v1/cta_buttons/bulk_update', params: visible_false_params, headers: headers
         expect(response).to have_http_status(:success)
         
-        # デバッグ情報を追加
-        json_response = JSON.parse(response.body)
-        puts "Response: #{json_response.inspect}"
-        puts "Response data count: #{json_response['data'].length}"
-        
         buttons = tenant.cta_buttons.reload.ordered
-        puts "Saved buttons count: #{buttons.length}"
-        buttons.each do |button|
-          puts "Button: title='#{button.title}', visible=#{button.visible}, url='#{button.url}'"
-        end
-        
         expect(buttons.length).to eq(2)
         expect(buttons[0].visible).to be false
         expect(buttons[0].title).to eq('')

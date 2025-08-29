@@ -31,7 +31,6 @@ const Header: React.FC<HeaderProps> = ({ title = 'じぶんキャラ診断' }) =
         )
 
         if (response.data.status === 'success' && response.data.data) {
-          console.log('Header API response:', response.data.data)
           setNavigationItems(response.data.data)
         }
       } catch {

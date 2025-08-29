@@ -55,7 +55,6 @@ const PageDesignManager: React.FC = () => {
 
       if (response.data.status === 'success') {
         const items = response.data.data
-        console.log('Loaded navigation items:', items)
         const newNavigationItems = [...navigationItems]
 
         items.forEach((item: NavigationItem) => {
@@ -67,7 +66,6 @@ const PageDesignManager: React.FC = () => {
           }
         })
 
-        console.log('Set navigation items:', newNavigationItems)
         setNavigationItems(newNavigationItems)
       }
     } catch {
@@ -87,7 +85,6 @@ const PageDesignManager: React.FC = () => {
 
       if (response.data.status === 'success') {
         const buttons = response.data.data
-        console.log('Loaded CTA buttons:', buttons)
         const newCtaButtons = [...ctaButtons]
         
         buttons.forEach((button: CtaButton) => {
@@ -99,11 +96,9 @@ const PageDesignManager: React.FC = () => {
           }
         })
         
-        console.log('Set CTA buttons:', newCtaButtons)
         setCtaButtons(newCtaButtons)
       }
-    } catch (error) {
-      console.error('Failed to load CTA buttons:', error)
+    } catch {
       // Loading failed, continue with empty buttons
     }
   }
@@ -148,13 +143,6 @@ const PageDesignManager: React.FC = () => {
       const API_BASE_URL =
         import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1'
 
-      console.log('Saving navigation items:', navigationItems.map(item => ({
-        label: item.label,
-        url: item.url, 
-        position: item.position,
-        visible: item.visible
-      })))
-      
       const [navResponse, ctaResponse] = await Promise.all([
         axios.post(
           `${API_BASE_URL}/navigation_items/bulk_update`,

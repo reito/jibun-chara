@@ -24,9 +24,7 @@ class Api::V1::CtaButtonsController < ApplicationController
     buttons_params = params.permit(cta_buttons: [:title, :subtitle, :url, :description, :position, :visible], cta_button: {})[:cta_buttons] || []
     
     # 既存のボタンを削除
-    Rails.logger.info "Destroying existing CTA buttons for tenant: #{@tenant.id}"
     @tenant.cta_buttons.destroy_all
-    Rails.logger.info "Processing CTA buttons params: #{buttons_params.class} - #{buttons_params}"
     
     # 新しいボタンを作成
     success_count = 0
@@ -37,18 +35,12 @@ class Api::V1::CtaButtonsController < ApplicationController
       button_hash = button_params.to_h if button_params.respond_to?(:to_h)
       button_hash ||= button_params
       
-      Rails.logger.info "Processing button #{index + 1}: visible=#{button_hash[:visible]}, title='#{button_hash[:title]}', url='#{button_hash[:url]}'"
-      
       # visible: falseの場合は空でも保存、そうでない場合は空ならスキップ
       if button_hash[:visible] == false
         # visible: falseの場合は必ず保存（空でも）
-        Rails.logger.info "Saving button #{index + 1} because visible=false"
       else
         # それ以外（nil, true）の場合は空ならスキップ
-        if button_hash[:title].blank? && button_hash[:url].blank?
-          Rails.logger.info "Skipping button #{index + 1} because title and url are blank"
-          next
-        end
+        next if button_hash[:title].blank? && button_hash[:url].blank?
       end
       
       cta_button = @tenant.cta_buttons.build(
@@ -62,9 +54,7 @@ class Api::V1::CtaButtonsController < ApplicationController
       
       if cta_button.save
         success_count += 1
-        Rails.logger.info "Successfully saved button #{index + 1}"
       else
-        Rails.logger.error "Failed to save button #{index + 1}: #{cta_button.errors.full_messages.join(', ')}"
         errors << "#{index + 1}番目: #{cta_button.errors.full_messages.join(', ')}"
       end
     end

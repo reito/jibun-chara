@@ -61,12 +61,9 @@ module Api
       def bulk_update
         # 複数のナビアイテムを一括更新
         items_params = params.permit(navigation_items: [:label, :url, :position, :visible], navigation_item: {})[:navigation_items] || []
-        Rails.logger.info "Received navigation items params: #{items_params}"
 
         # 既存のアイテムを削除
-        Rails.logger.info "Destroying existing navigation items for tenant: #{@tenant.id}"
         @tenant.navigation_items.destroy_all
-        Rails.logger.info "Processing navigation items params: #{items_params.class} - #{items_params}"
 
         # 新しいアイテムを作成
         success_count = 0
@@ -86,14 +83,10 @@ module Api
             position: index + 1,
             visible: item_hash[:visible]
           )
-          Rails.logger.info "Creating navigation item: #{navigation_item.attributes}"
-
           if navigation_item.save
             success_count += 1
-            Rails.logger.info "Successfully saved navigation item #{index + 1}"
           else
             error_msg = "#{index + 1}番目: #{navigation_item.errors.full_messages.join(', ')}"
-            Rails.logger.error "Failed to save navigation item #{index + 1}: #{navigation_item.errors.full_messages}"
             errors << error_msg
           end
         end
@@ -120,7 +113,6 @@ module Api
 
         if tenant
           navigation_items = tenant.navigation_items.visible_items.ordered
-          Rails.logger.info "Public navigation items for #{tenant.slug}: #{navigation_items.map(&:attributes)}"
           render json: {
             status: "success",
             data: navigation_items
