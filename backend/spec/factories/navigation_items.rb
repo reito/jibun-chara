@@ -4,5 +4,6 @@ FactoryBot.define do
     label { "Sample Navigation Item" }
     url { "https://example.com" }
     sequence(:position) { |n| n }
+    visible { true }
   end
 end

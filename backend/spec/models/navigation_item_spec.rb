@@ -8,14 +8,18 @@ RSpec.describe NavigationItem, type: :model do
   describe 'validations' do
     let(:tenant) { create(:tenant) }
 
-    it { should validate_presence_of(:label) }
-    it { should validate_presence_of(:url) }
+    # labelとurlはpresenceバリデーションはなく、空の場合はコントローラーでスキップ
     it { should validate_presence_of(:position) }
 
-    it 'validates URL format' do
+    it 'validates URL format when URL is present' do
       item = build(:navigation_item, tenant: tenant, url: 'invalid-url')
       expect(item).not_to be_valid
       expect(item.errors[:url]).to include('is invalid')
+    end
+    
+    it 'allows blank URLs' do
+      item = build(:navigation_item, tenant: tenant, url: '')
+      expect(item).to be_valid
     end
 
     it 'allows valid URLs' do

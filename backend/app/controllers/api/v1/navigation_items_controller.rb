@@ -60,28 +60,41 @@ module Api
 
       def bulk_update
         # 複数のナビアイテムを一括更新
-        items_params = params[:navigation_items] || []
+        items_params = params.permit(navigation_items: [:label, :url, :position, :visible], navigation_item: {})[:navigation_items] || []
+        Rails.logger.info "Received navigation items params: #{items_params}"
 
         # 既存のアイテムを削除
+        Rails.logger.info "Destroying existing navigation items for tenant: #{@tenant.id}"
         @tenant.navigation_items.destroy_all
+        Rails.logger.info "Processing navigation items params: #{items_params.class} - #{items_params}"
 
         # 新しいアイテムを作成
         success_count = 0
         errors = []
 
         items_params.each_with_index do |item_params, index|
-          next if item_params[:label].blank? || item_params[:url].blank?
+          # ActionController::Parametersをハッシュに変換
+          item_hash = item_params.to_h if item_params.respond_to?(:to_h)
+          item_hash ||= item_params
+          
+          # visible: falseでも、labelとurlが両方入力されていれば保存
+          next if item_hash[:label].blank? && item_hash[:url].blank?
 
           navigation_item = @tenant.navigation_items.build(
-            label: item_params[:label],
-            url: item_params[:url],
-            position: index + 1
+            label: item_hash[:label],
+            url: item_hash[:url],
+            position: index + 1,
+            visible: item_hash[:visible]
           )
+          Rails.logger.info "Creating navigation item: #{navigation_item.attributes}"
 
           if navigation_item.save
             success_count += 1
+            Rails.logger.info "Successfully saved navigation item #{index + 1}"
           else
-            errors << "#{index + 1}番目: #{navigation_item.errors.full_messages.join(', ')}"
+            error_msg = "#{index + 1}番目: #{navigation_item.errors.full_messages.join(', ')}"
+            Rails.logger.error "Failed to save navigation item #{index + 1}: #{navigation_item.errors.full_messages}"
+            errors << error_msg
           end
         end
 
@@ -106,7 +119,8 @@ module Api
         tenant = Tenant.find_by(slug: params[:tenant_slug])
 
         if tenant
-          navigation_items = tenant.navigation_items.ordered
+          navigation_items = tenant.navigation_items.visible_items.ordered
+          Rails.logger.info "Public navigation items for #{tenant.slug}: #{navigation_items.map(&:attributes)}"
           render json: {
             status: "success",
             data: navigation_items
@@ -148,7 +162,7 @@ module Api
       end
 
       def navigation_item_params
-        params.require(:navigation_item).permit(:label, :url, :position)
+        params.require(:navigation_item).permit(:label, :url, :position, :visible)
       end
     end
   end

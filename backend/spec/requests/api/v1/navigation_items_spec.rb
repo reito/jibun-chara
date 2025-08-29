@@ -107,8 +107,8 @@ RSpec.describe "Api::V1::NavigationItems", type: :request do
       let(:bulk_params) do
         {
           navigation_items: [
-            { label: 'Item 1', url: 'https://example.com/1', position: 1 },
-            { label: 'Item 2', url: 'https://example.com/2', position: 2 }
+            { label: 'Item 1', url: 'https://example.com/1', position: 1, visible: true },
+            { label: 'Item 2', url: 'https://example.com/2', position: 2, visible: false }
           ]
         }
       end
@@ -127,6 +127,31 @@ RSpec.describe "Api::V1::NavigationItems", type: :request do
         expect(json_response['data'].length).to eq(2)
 
         expect(NavigationItem.exists?(existing_item.id)).to be false
+        
+        # visible属性が正しく保存されているか確認
+        items = tenant.navigation_items.reload.ordered
+        expect(items[0].visible).to be true
+        expect(items[1].visible).to be false
+      end
+    end
+    
+    context 'with empty items (should be skipped)' do
+      let(:empty_bulk_params) do
+        {
+          navigation_items: [
+            { label: '', url: '', position: 1, visible: true },
+            { label: 'Valid Item', url: 'https://example.com/valid', position: 2, visible: true }
+          ]
+        }
+      end
+      
+      it 'skips empty items and saves only valid ones' do
+        post '/api/v1/navigation_items/bulk_update', params: empty_bulk_params, headers: headers
+        expect(response).to have_http_status(:success)
+        json_response = JSON.parse(response.body)
+        expect(json_response['status']).to eq('success')
+        expect(json_response['data'].length).to eq(1)
+        expect(json_response['data'][0]['label']).to eq('Valid Item')
       end
     end
 

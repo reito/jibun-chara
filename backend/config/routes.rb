@@ -36,6 +36,12 @@ Rails.application.routes.draw do
       resources :registrations, only: [ :create ]
       resources :navigation_items, except: [ :new, :edit ]
       post "/navigation_items/bulk_update", to: "navigation_items#bulk_update"
+      resources :cta_buttons, except: [ :new, :edit ] do
+        collection do
+          get :admin_index
+          post :bulk_update
+        end
+      end
       post "/sessions", to: "sessions#create"
       delete "/sessions", to: "sessions#destroy"
       get "/sessions/validate", to: "sessions#validate"

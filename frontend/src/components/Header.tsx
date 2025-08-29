@@ -12,6 +12,7 @@ interface NavigationItem {
   label: string
   url: string
   position: number
+  visible: boolean
 }
 
 const Header: React.FC<HeaderProps> = ({ title = 'じぶんキャラ診断' }) => {
@@ -30,6 +31,7 @@ const Header: React.FC<HeaderProps> = ({ title = 'じぶんキャラ診断' }) =
         )
 
         if (response.data.status === 'success' && response.data.data) {
+          console.log('Header API response:', response.data.data)
           setNavigationItems(response.data.data)
         }
       } catch {
@@ -56,8 +58,8 @@ const Header: React.FC<HeaderProps> = ({ title = 'じぶんキャラ診断' }) =
       <nav className="relative bg-white py-[10px] px-[15px] shadow-[0_4px_6px_rgba(0,0,0,0.05)] min-h-[48px] flex items-center">
         {/* 中央: メインナビゲーション */}
         <div className="flex justify-center flex-wrap flex-1">
-          {navigationItems.length > 0 ? (
-            navigationItems.map((item) => (
+          {navigationItems.filter(item => item.visible && item.label && item.url).length > 0 ? (
+            navigationItems.filter(item => item.visible && item.label && item.url).map((item) => (
               <a
                 key={item.id || item.position}
                 href={item.url}
