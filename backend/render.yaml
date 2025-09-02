@@ -3,7 +3,7 @@ services:
     name: jubun-chara-backend
     env: ruby
     buildCommand: bundle install
-    startCommand: bundle exec rails db:migrate && bundle exec rails s -p 10000 -b 0.0.0.0
+    startCommand: bundle exec rails db:migrate && bundle exec puma -C config/puma.rb
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -12,9 +12,9 @@ services:
       - key: RAILS_ENV
         value: production
       - key: FRONTEND_URL
-        value: https://jubun-chara-frontend.onrender.com
+        value: https://jibun-chara.onrender.com
       - key: ALLOWED_ORIGINS
-        value: http://localhost:5173,https://jubun-chara-frontend.onrender.com
+        value: http://localhost:5173,https://jibun-chara.onrender.com
     autoDeploy: true
 
 databases:

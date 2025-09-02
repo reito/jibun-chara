@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: jubun-chara-frontend
+    name: jibun-chara-frontend
     env: static
     buildCommand: yarn install && yarn build
     staticPublishPath: ./dist
