@@ -7,7 +7,9 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:5173", "https://jibun-chara.onrender.com"
+    # 環境変数から許可するオリジンを読み込む
+    allowed_origins = ENV.fetch("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
+    origins *allowed_origins
     resource "*",
       headers: :any,
       methods: [ :get, :post, :put, :patch, :delete, :options ],
