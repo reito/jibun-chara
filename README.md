@@ -137,6 +137,10 @@ jibun-chara/
 
    <img width="1435" height="810" alt="Image" src="https://github.com/user-attachments/assets/704930ed-791c-4219-911f-b505a0bb130c" />
 
+   - ページ・デザイン管理(ナビゲーションアイテム・CTAボタン編集)
+
+   <img width="1435" height="810" alt="Image" src="https://github.com/user-attachments/assets/b53d1a36-005d-4afc-8463-c39d5d1bfccb" />
+
 6. **ページ・デザイン管理** (`PageDesignManager.tsx`) (実装済み)
    - **ナビゲーションアイテム設定**：ヘッダーメニューの文言・リンク・表示切替
    - **CTAボタン設定**：診断結果ページのCTAボタンの文言・リンク・説明・表示切替
