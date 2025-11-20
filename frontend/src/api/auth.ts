@@ -62,7 +62,7 @@ export const loginUser = async (data: LoginData) => {
     const { tenant_slug, ...loginData } = data
     const response = await axios.post(
       `${API_BASE_URL}/tenants/${tenant_slug}/sessions`,
-      loginData
+      loginData,
     )
     return response.data
   } catch (error) {

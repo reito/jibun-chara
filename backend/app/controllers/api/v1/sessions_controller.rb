@@ -4,7 +4,7 @@ module Api
       def create
         # テナントスラッグが必須
         tenant = Tenant.find_by(slug: params[:tenant_slug])
-        
+
         unless tenant
           return render json: {
             status: "error",
