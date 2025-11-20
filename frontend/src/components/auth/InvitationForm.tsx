@@ -11,6 +11,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({
   const [formData, setFormData] = useState({
     name: '',
     slug: '',
+    admin_email: '',
   })
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -59,6 +60,25 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({
             onChange={handleChange}
             required
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="admin_email"
+            className="block text-sm font-medium text-gray-700"
+          >
+            管理者メールアドレス
+          </label>
+          <input
+            type="email"
+            id="admin_email"
+            name="admin_email"
+            value={formData.admin_email}
+            onChange={handleChange}
+            required
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            placeholder="admin@example.com"
           />
         </div>
 

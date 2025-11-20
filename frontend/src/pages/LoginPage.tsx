@@ -20,7 +20,10 @@ const LoginPage: React.FC = () => {
     setIsLoading(true)
 
     try {
-      const response = await loginUser(formData)
+      const response = await loginUser({
+        ...formData,
+        tenant_slug: slug!,
+      })
       if (response.status === 'success') {
         login(response.data.user, response.data.token)
         navigate(`/${slug}/dashboard`)

@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :tenant
+  acts_as_tenant(:tenant)
 end
