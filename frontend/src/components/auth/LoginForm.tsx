@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { loginUser } from '../../api/auth'
 
 interface LoginFormProps {
@@ -6,6 +7,7 @@ interface LoginFormProps {
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
+  const { slug } = useParams<{ slug: string }>()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -18,8 +20,17 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
     setError(null)
     setIsLoading(true)
 
+    if (!slug) {
+      setError('テナント情報が見つかりません。ページを再読み込みしてください。')
+      setIsLoading(false)
+      return
+    }
+
     try {
-      await loginUser(formData)
+      await loginUser({
+        ...formData,
+        tenant_slug: slug,
+      })
       onSuccess()
     } catch (err) {
       setError('ログインに失敗しました。')
