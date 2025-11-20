@@ -12,11 +12,13 @@ interface RegistrationData {
 interface LoginData {
   email: string
   password: string
+  tenant_slug: string
 }
 
 export const createInvitation = async (tenantData: {
   name: string
   slug: string
+  admin_email: string
 }) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/invitations`, {
@@ -57,7 +59,11 @@ export const registerUser = async (token: string, data: RegistrationData) => {
 
 export const loginUser = async (data: LoginData) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/sessions`, data)
+    const { tenant_slug, ...loginData } = data
+    const response = await axios.post(
+      `${API_BASE_URL}/tenants/${tenant_slug}/sessions`,
+      loginData,
+    )
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {

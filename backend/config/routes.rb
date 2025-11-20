@@ -42,7 +42,8 @@ Rails.application.routes.draw do
           post :bulk_update
         end
       end
-      post "/sessions", to: "sessions#create"
+      # ログインはテナントスラッグ必須
+      post "/tenants/:tenant_slug/sessions", to: "sessions#create"
       delete "/sessions", to: "sessions#destroy"
       get "/sessions/validate", to: "sessions#validate"
       get "cta_buttons/index"

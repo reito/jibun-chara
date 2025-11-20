@@ -2,35 +2,48 @@ module Api
   module V1
     class SessionsController < ApplicationController
       def create
-        user = User.find_by(email: params[:email])
+        # テナントスラッグが必須
+        tenant = Tenant.find_by(slug: params[:tenant_slug])
 
-        if user && user.valid_password?(params[:password])
-          # セッショントークンを生成
-          token = SecureRandom.hex(20)
-
-          # トークンと有効期限をユーザーに保存（24時間後に期限切れ）
-          user.update(
-            authentication_token: token,
-            token_expires_at: 24.hours.from_now
-          )
-
-          render json: {
-            status: "success",
-            data: {
-              user: {
-                id: user.id,
-                email: user.email,
-                name: user.name,
-                tenant_slug: user.tenant.slug
-              },
-              token: token
-            }
-          }, status: :ok
-        else
-          render json: {
+        unless tenant
+          return render json: {
             status: "error",
-            message: "メールアドレスまたはパスワードが正しくありません"
-          }, status: :unauthorized
+            message: "相談所が見つかりません"
+          }, status: :not_found
+        end
+
+        # テナント内でのみユーザーを検索
+        ActsAsTenant.with_tenant(tenant) do
+          user = User.find_by(email: params[:email])
+
+          if user && user.valid_password?(params[:password])
+            # セッショントークンを生成
+            token = SecureRandom.hex(20)
+
+            # トークンと有効期限をユーザーに保存（24時間後に期限切れ）
+            user.update(
+              authentication_token: token,
+              token_expires_at: 24.hours.from_now
+            )
+
+            render json: {
+              status: "success",
+              data: {
+                user: {
+                  id: user.id,
+                  email: user.email,
+                  name: user.name,
+                  tenant_slug: user.tenant.slug
+                },
+                token: token
+              }
+            }, status: :ok
+          else
+            render json: {
+              status: "error",
+              message: "メールアドレスまたはパスワードが正しくありません"
+            }, status: :unauthorized
+          end
         end
       end
 
